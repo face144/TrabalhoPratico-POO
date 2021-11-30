@@ -1,0 +1,3 @@
+D:/Github/TrabalhoPratico-POO-Reloaded/cmake-build-debug/CMakeFiles/TrabalhoPratico_POO_Reloaded.dir
+D:/Github/TrabalhoPratico-POO-Reloaded/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Github/TrabalhoPratico-POO-Reloaded/cmake-build-debug/CMakeFiles/rebuild_cache.dir
