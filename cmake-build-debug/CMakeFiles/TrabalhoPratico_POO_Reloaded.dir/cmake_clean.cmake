@@ -1,5 +1,11 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Interface.cpp.obj"
+  "CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/App.cpp.obj"
+  "CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Building.cpp.obj"
+  "CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Cell.cpp.obj"
+  "CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Commands.cpp.obj"
+  "CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Island.cpp.obj"
+  "CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Player.cpp.obj"
+  "CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Resource.cpp.obj"
   "CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/main.cpp.obj"
   "TrabalhoPratico_POO_Reloaded.exe"
   "TrabalhoPratico_POO_Reloaded.exe.manifest"

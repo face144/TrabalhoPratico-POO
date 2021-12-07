@@ -128,29 +128,173 @@ TrabalhoPratico_POO_Reloaded/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/build
 .PHONY : TrabalhoPratico_POO_Reloaded/fast
 
-Interface.obj: Interface.cpp.obj
-.PHONY : Interface.obj
+App.obj: App.cpp.obj
+.PHONY : App.obj
 
 # target to build an object file
-Interface.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Interface.cpp.obj
-.PHONY : Interface.cpp.obj
+App.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/App.cpp.obj
+.PHONY : App.cpp.obj
 
-Interface.i: Interface.cpp.i
-.PHONY : Interface.i
+App.i: App.cpp.i
+.PHONY : App.i
 
 # target to preprocess a source file
-Interface.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Interface.cpp.i
-.PHONY : Interface.cpp.i
+App.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/App.cpp.i
+.PHONY : App.cpp.i
 
-Interface.s: Interface.cpp.s
-.PHONY : Interface.s
+App.s: App.cpp.s
+.PHONY : App.s
 
 # target to generate assembly for a file
-Interface.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Interface.cpp.s
-.PHONY : Interface.cpp.s
+App.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/App.cpp.s
+.PHONY : App.cpp.s
+
+Building.obj: Building.cpp.obj
+.PHONY : Building.obj
+
+# target to build an object file
+Building.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Building.cpp.obj
+.PHONY : Building.cpp.obj
+
+Building.i: Building.cpp.i
+.PHONY : Building.i
+
+# target to preprocess a source file
+Building.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Building.cpp.i
+.PHONY : Building.cpp.i
+
+Building.s: Building.cpp.s
+.PHONY : Building.s
+
+# target to generate assembly for a file
+Building.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Building.cpp.s
+.PHONY : Building.cpp.s
+
+Cell.obj: Cell.cpp.obj
+.PHONY : Cell.obj
+
+# target to build an object file
+Cell.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Cell.cpp.obj
+.PHONY : Cell.cpp.obj
+
+Cell.i: Cell.cpp.i
+.PHONY : Cell.i
+
+# target to preprocess a source file
+Cell.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Cell.cpp.i
+.PHONY : Cell.cpp.i
+
+Cell.s: Cell.cpp.s
+.PHONY : Cell.s
+
+# target to generate assembly for a file
+Cell.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Cell.cpp.s
+.PHONY : Cell.cpp.s
+
+Commands.obj: Commands.cpp.obj
+.PHONY : Commands.obj
+
+# target to build an object file
+Commands.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Commands.cpp.obj
+.PHONY : Commands.cpp.obj
+
+Commands.i: Commands.cpp.i
+.PHONY : Commands.i
+
+# target to preprocess a source file
+Commands.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Commands.cpp.i
+.PHONY : Commands.cpp.i
+
+Commands.s: Commands.cpp.s
+.PHONY : Commands.s
+
+# target to generate assembly for a file
+Commands.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Commands.cpp.s
+.PHONY : Commands.cpp.s
+
+Island.obj: Island.cpp.obj
+.PHONY : Island.obj
+
+# target to build an object file
+Island.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Island.cpp.obj
+.PHONY : Island.cpp.obj
+
+Island.i: Island.cpp.i
+.PHONY : Island.i
+
+# target to preprocess a source file
+Island.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Island.cpp.i
+.PHONY : Island.cpp.i
+
+Island.s: Island.cpp.s
+.PHONY : Island.s
+
+# target to generate assembly for a file
+Island.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Island.cpp.s
+.PHONY : Island.cpp.s
+
+Player.obj: Player.cpp.obj
+.PHONY : Player.obj
+
+# target to build an object file
+Player.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Player.cpp.obj
+.PHONY : Player.cpp.obj
+
+Player.i: Player.cpp.i
+.PHONY : Player.i
+
+# target to preprocess a source file
+Player.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Player.cpp.i
+.PHONY : Player.cpp.i
+
+Player.s: Player.cpp.s
+.PHONY : Player.s
+
+# target to generate assembly for a file
+Player.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Player.cpp.s
+.PHONY : Player.cpp.s
+
+Resource.obj: Resource.cpp.obj
+.PHONY : Resource.obj
+
+# target to build an object file
+Resource.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Resource.cpp.obj
+.PHONY : Resource.cpp.obj
+
+Resource.i: Resource.cpp.i
+.PHONY : Resource.i
+
+# target to preprocess a source file
+Resource.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Resource.cpp.i
+.PHONY : Resource.cpp.i
+
+Resource.s: Resource.cpp.s
+.PHONY : Resource.s
+
+# target to generate assembly for a file
+Resource.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoPratico_POO_Reloaded.dir\build.make CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Resource.cpp.s
+.PHONY : Resource.cpp.s
 
 main.obj: main.cpp.obj
 .PHONY : main.obj
@@ -185,9 +329,27 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... TrabalhoPratico_POO_Reloaded
-	@echo ... Interface.obj
-	@echo ... Interface.i
-	@echo ... Interface.s
+	@echo ... App.obj
+	@echo ... App.i
+	@echo ... App.s
+	@echo ... Building.obj
+	@echo ... Building.i
+	@echo ... Building.s
+	@echo ... Cell.obj
+	@echo ... Cell.i
+	@echo ... Cell.s
+	@echo ... Commands.obj
+	@echo ... Commands.i
+	@echo ... Commands.s
+	@echo ... Island.obj
+	@echo ... Island.i
+	@echo ... Island.s
+	@echo ... Player.obj
+	@echo ... Player.i
+	@echo ... Player.s
+	@echo ... Resource.obj
+	@echo ... Resource.i
+	@echo ... Resource.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

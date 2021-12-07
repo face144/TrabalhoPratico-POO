@@ -1,16 +1,12 @@
 #include <iostream>
-#include "Interface.h"
+#include "App.h"
 
 using namespace std;
 
 int main() {
-    cout << "Nome de utilizador: ";
-    string username;
-    cin >> username;
-
-    Interface interface(username);
-    interface.mapInit();
-    interface.gameScene();
+    App game;
+    game.Start();
+    game.Loop();
 
     return 0;
 }

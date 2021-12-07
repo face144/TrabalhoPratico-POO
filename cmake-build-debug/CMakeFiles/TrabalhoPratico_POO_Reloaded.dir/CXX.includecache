@@ -6,12 +6,16 @@
 
 #IncludeRegexTransform: 
 
-D:/Github/TrabalhoPratico-POO-Reloaded/Interface.cpp
-Interface.h
-D:/Github/TrabalhoPratico-POO-Reloaded/Interface.h
+D:/Github/TrabalhoPratico-POO-Reloaded/Commands.cpp
+Commands.h
+D:/Github/TrabalhoPratico-POO-Reloaded/Commands.h
 
-D:/Github/TrabalhoPratico-POO-Reloaded/Interface.h
+D:/Github/TrabalhoPratico-POO-Reloaded/Commands.h
 iostream
+-
+vector
+-
+string
 -
 cstring
 -

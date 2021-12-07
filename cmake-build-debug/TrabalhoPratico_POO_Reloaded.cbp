@@ -80,10 +80,46 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Interface.cpp">
+		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/App.cpp">
 			<Option target="TrabalhoPratico_POO_Reloaded"/>
 		</Unit>
-		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Interface.h">
+		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/App.h">
+			<Option target="TrabalhoPratico_POO_Reloaded"/>
+		</Unit>
+		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Building.cpp">
+			<Option target="TrabalhoPratico_POO_Reloaded"/>
+		</Unit>
+		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Building.h">
+			<Option target="TrabalhoPratico_POO_Reloaded"/>
+		</Unit>
+		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Cell.cpp">
+			<Option target="TrabalhoPratico_POO_Reloaded"/>
+		</Unit>
+		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Cell.h">
+			<Option target="TrabalhoPratico_POO_Reloaded"/>
+		</Unit>
+		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Commands.cpp">
+			<Option target="TrabalhoPratico_POO_Reloaded"/>
+		</Unit>
+		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Commands.h">
+			<Option target="TrabalhoPratico_POO_Reloaded"/>
+		</Unit>
+		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Island.cpp">
+			<Option target="TrabalhoPratico_POO_Reloaded"/>
+		</Unit>
+		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Island.h">
+			<Option target="TrabalhoPratico_POO_Reloaded"/>
+		</Unit>
+		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Player.cpp">
+			<Option target="TrabalhoPratico_POO_Reloaded"/>
+		</Unit>
+		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Player.h">
+			<Option target="TrabalhoPratico_POO_Reloaded"/>
+		</Unit>
+		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Resource.cpp">
+			<Option target="TrabalhoPratico_POO_Reloaded"/>
+		</Unit>
+		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Resource.h">
 			<Option target="TrabalhoPratico_POO_Reloaded"/>
 		</Unit>
 		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/main.cpp">

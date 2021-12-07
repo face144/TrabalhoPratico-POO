@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Customa
+*.zip
+*.xml
+
+/cmake-build-debug/
