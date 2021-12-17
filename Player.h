@@ -3,33 +3,41 @@
 
 #include <iostream>
 #include <vector>
-#include "Resource.h"
+#include "Storage.h"
+#include "Commands.h"
 
 using namespace std;
 
 class Player {
 private:
+    Commands input;
     string username;
-    Resource* money;
-    Resource* iron;
-    Resource* steel;
-    Resource* coal;
-    Resource* wood;
-    Resource* wood_beam;
-    Resource* electricity;
+    Storage* iron = Storage::Create("iron");
+
+/*    Storage* money = new Storage;
+    Storage* steel = new Storage;
+    Storage* coal = new Storage;
+    Storage* wood = new Storage;
+    Storage* wood_beam = new Storage;
+    Storage* electricity = new Storage;*/
 
 public:
     Player();
     ~Player();
 
-    void SetMoney(int money);
+    vector <string> SetInput();
+    void SetUsername(string username);
     void SetIron(int iron);
+
+/*    void SetMoney(int money);
     void SetSteel(int steel);
     void SetCoal(int coal);
     void SetWood(int wood);
     void SetWoodBeam(int wood_beam);
-    void SetElectricity(int electricity);
+    void SetElectricity(int electricity);*/
 
+    string GetUsername();
+    int GetIronQuantity();
 };
 
 

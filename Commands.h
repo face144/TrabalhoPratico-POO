@@ -5,18 +5,18 @@
 #include <vector>
 #include <string>
 #include <cstring>
+#include <sstream>
 
 using namespace std;
 
 class Commands {
 private:
-    string* input;
-    bool Validator();
+    vector <string> input;
 
 public:
     Commands();
     ~Commands();
-    void GetInput();
+    vector <string> GetInput();
 
 };
 

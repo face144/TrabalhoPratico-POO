@@ -6,17 +6,35 @@
 
 #IncludeRegexTransform: 
 
-D:/Github/TrabalhoPratico-POO-Reloaded/Commands.cpp
-Commands.h
-D:/Github/TrabalhoPratico-POO-Reloaded/Commands.h
-
-D:/Github/TrabalhoPratico-POO-Reloaded/Commands.h
+D:/Github/TrabalhoPratico-POO-Reloaded/Building.h
 iostream
+-
+
+D:/Github/TrabalhoPratico-POO-Reloaded/Cell.h
+iostream
+-
+cstdlib
+-
+ctime
+-
+random
+-
+chrono
+-
+Building.h
+D:/Github/TrabalhoPratico-POO-Reloaded/Building.h
+
+D:/Github/TrabalhoPratico-POO-Reloaded/Island.cpp
+Island.h
+D:/Github/TrabalhoPratico-POO-Reloaded/Island.h
+
+D:/Github/TrabalhoPratico-POO-Reloaded/Island.h
+iostream
+-
+sstream
 -
 vector
 -
-string
--
-cstring
--
+Cell.h
+D:/Github/TrabalhoPratico-POO-Reloaded/Cell.h
 

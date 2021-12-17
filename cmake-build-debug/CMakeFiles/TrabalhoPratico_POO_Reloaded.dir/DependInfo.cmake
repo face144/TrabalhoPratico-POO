@@ -14,7 +14,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "D:/Github/TrabalhoPratico-POO-Reloaded/Commands.cpp" "D:/Github/TrabalhoPratico-POO-Reloaded/cmake-build-debug/CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Commands.cpp.obj"
   "D:/Github/TrabalhoPratico-POO-Reloaded/Island.cpp" "D:/Github/TrabalhoPratico-POO-Reloaded/cmake-build-debug/CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Island.cpp.obj"
   "D:/Github/TrabalhoPratico-POO-Reloaded/Player.cpp" "D:/Github/TrabalhoPratico-POO-Reloaded/cmake-build-debug/CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Player.cpp.obj"
-  "D:/Github/TrabalhoPratico-POO-Reloaded/Resource.cpp" "D:/Github/TrabalhoPratico-POO-Reloaded/cmake-build-debug/CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Resource.cpp.obj"
+  "D:/Github/TrabalhoPratico-POO-Reloaded/Storage.cpp" "D:/Github/TrabalhoPratico-POO-Reloaded/cmake-build-debug/CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/Storage.cpp.obj"
   "D:/Github/TrabalhoPratico-POO-Reloaded/main.cpp" "D:/Github/TrabalhoPratico-POO-Reloaded/cmake-build-debug/CMakeFiles/TrabalhoPratico_POO_Reloaded.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

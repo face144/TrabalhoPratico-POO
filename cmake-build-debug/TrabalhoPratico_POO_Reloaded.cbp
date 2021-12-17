@@ -116,10 +116,10 @@
 		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Player.h">
 			<Option target="TrabalhoPratico_POO_Reloaded"/>
 		</Unit>
-		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Resource.cpp">
+		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Storage.cpp">
 			<Option target="TrabalhoPratico_POO_Reloaded"/>
 		</Unit>
-		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Resource.h">
+		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/Storage.h">
 			<Option target="TrabalhoPratico_POO_Reloaded"/>
 		</Unit>
 		<Unit filename="D:/Github/TrabalhoPratico-POO-Reloaded/main.cpp">

@@ -3,20 +3,26 @@
 
 #include <iostream>
 #include "Island.h"
-#include "Commands.h"
+#include "Player.h"
 
 using namespace std;
 
 class App {
+    int day = 0;
+
     Island* map;
-    Commands* input;
+    Player* player;
+
+    string PrintHUD();
+    int CommandHandler();
+    bool PurchaseHandler(string type);
 
 public:
     App();
+    ~App();
 
     void Start();
     void Loop();
-
 };
 
 

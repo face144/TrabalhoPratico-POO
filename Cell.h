@@ -2,19 +2,33 @@
 #define TRABALHOPRATICO_POO_RELOADED_CELL_H
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include <random>
+#include <chrono>
+
+#include "Building.h"
 
 using namespace std;
 
 class Cell {
 private:
-    int type;
-    //Building
+    string type;
+    Building* building = new Building;
     //Worker
 
 public:
-    static Cell* Create();
+    int id;
 
+    Cell();
+    ~Cell();
+
+    static Cell* Create();
+    string GetType();
+
+    string GetBuildingType();
+
+    void SetBuilding(string type);
 };
 
 
