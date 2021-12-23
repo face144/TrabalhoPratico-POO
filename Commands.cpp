@@ -1,21 +1,31 @@
 #include "Commands.h"
 
 Commands::Commands() {
-
+    input.emplace_back("undef");
 }
 
 Commands::~Commands() {
+
 }
 
-vector <string> Commands::GetInput() {
-    string temp_input;
-    cin.clear();
-    getline(cin, temp_input);
-    istringstream iss{temp_input};
+int Commands::GetInput() {
+    auto* cmd = new Commands;
+    int i = 0;
 
-    while (getline(iss, temp_input, ' '))
-        input.push_back(temp_input);
+    getline( cin, cmd->input.at(i));
 
-    //input.shrink_to_fit();
-    return input;
+
+    i = 0;
+    int exit_code = -1;
+    if ( cmd->input.at(i) == "next")
+        exit_code = 2;
+
+    else if ( cmd->input.at(i) == "cons" )
+        exit_code = 1;
+
+    else exit_code = 0;
+
+    delete cmd;
+    return exit_code;
+
 }

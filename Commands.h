@@ -10,14 +10,13 @@
 using namespace std;
 
 class Commands {
-private:
     vector <string> input;
 
 public:
     Commands();
     ~Commands();
-    vector <string> GetInput();
 
+    static int GetInput();
 };
 
 
