@@ -1,23 +1,25 @@
 #ifndef TRABALHOPRATICO_POO_RELOADED_STORAGE_H
 #define TRABALHOPRATICO_POO_RELOADED_STORAGE_H
-
 #include <iostream>
 
 using namespace std;
 
 class Storage {
 private:
-    int quantity;
-    int sell_money;
+    int cap;
+    int max_cap;
 
 public:
     Storage();
     ~Storage();
 
-    void SetQuantity(int quantity);
-    static Storage* Create(string type);
+    int GetCap();
+    int GetMaxCap();
 
-    int GetQuantity();
+    void SetCap(int cap);
+    void SetMaxCap(int max_cap);
+
+
 };
 
 

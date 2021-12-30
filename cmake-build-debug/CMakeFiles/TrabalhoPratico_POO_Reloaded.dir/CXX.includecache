@@ -6,11 +6,23 @@
 
 #IncludeRegexTransform: 
 
-D:/Github/TrabalhoPratico-POO-Reloaded/Building.h
+C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/App.h
 iostream
 -
+string
+-
+Island.h
+C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/Island.h
+Player.h
+C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/Player.h
 
-D:/Github/TrabalhoPratico-POO-Reloaded/Cell.h
+C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/Building.h
+iostream
+-
+Storage.h
+C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/Storage.h
+
+C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/Cell.h
 iostream
 -
 cstdlib
@@ -21,14 +33,16 @@ random
 -
 chrono
 -
+thread
+-
 Building.h
-D:/Github/TrabalhoPratico-POO-Reloaded/Building.h
+C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/Building.h
 
-D:/Github/TrabalhoPratico-POO-Reloaded/Island.cpp
-Island.h
-D:/Github/TrabalhoPratico-POO-Reloaded/Island.h
+C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/Interface.h
+App.h
+C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/App.h
 
-D:/Github/TrabalhoPratico-POO-Reloaded/Island.h
+C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/Island.h
 iostream
 -
 sstream
@@ -36,5 +50,25 @@ sstream
 vector
 -
 Cell.h
-D:/Github/TrabalhoPratico-POO-Reloaded/Cell.h
+C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/Cell.h
+
+C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/Player.h
+iostream
+-
+vector
+-
+Storage.h
+C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/Storage.h
+
+C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/Storage.h
+iostream
+-
+
+C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/main.cpp
+iostream
+-
+istream
+-
+Interface.h
+C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/Interface.h
 

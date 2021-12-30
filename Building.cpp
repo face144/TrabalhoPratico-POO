@@ -2,20 +2,23 @@
 
 
 Building::Building() {
-    type = nullptr;
-    level = NULL;
-    max_level = NULL;
-    destroy_prob = NULL;
-    storage = nullptr;
+    type = "             ";
+    level = 0;
+    max_level = 0;
+    destroy_prob = 0 ;
+    is_online = false;
+    cap = 0;
+    max_cap = 0;
+    output = 0;
 }
 
-Building::~Building() {
-
-}
-
-int Building::GetOutput() const {
+int Building::GetOutput(){
     return output;
 }
+
+Building::~Building() { }
+
+
 
 string Building::GetType() const {
     return type;
@@ -23,72 +26,75 @@ string Building::GetType() const {
 
 Building* Building::Create(const string& type) {
     Building* building;
-
-    if (type == "minaf")
+    if (type == "minaf") {
         building = new Minaf;
-
-    else if (type == "minac")
+    } else if (type == "minac") {
         building = new Minac;
-
-    else if (type == "central")
+    } else if (type == "central") {
         building = new Central;
-
-    else if (type == "bat")
+    } else if (type == "bat") {
         building = new Bat;
-
-    else if (type == "fund")
+    } else if (type == "fund") {
         building = new Fund;
-
-    else if (type == "edx")
+    } else if (type == "edx") {
         building = new Edx;
-
-    else
-        return nullptr;
-
-
+    } else building = new Building;
     return building;
-
 }
 
 Minaf::Minaf() {
-    type = "minaf";
+
+    type = "minaf        ";
     level = 1;
     max_level = 5;
     destroy_prob = 0.15;
+    is_online = false;
+    cap = 0;
+    max_cap = 0;
+    output = 2;
 
 }
 
 Minac::Minac() {
-    type = "minac";
+    type = "minac        ";
     level = 1;
     max_level = 5;
     destroy_prob = 0.1;
+    is_online = false;
+    output = 2;
 }
 
 Central::Central() {
-    type = "central";
+    type = "central      ";
     level = 1;
     max_level = 1;
     destroy_prob = 0;
+    is_online = false;
+    output = 1;
+
 }
 
 Bat::Bat() {
-    type = "bat";
+    type = "bat          ";
     level = 1;
     max_level = 5;
     destroy_prob = 0;
+    is_online = false;
+
 }
 
 Fund::Fund() {
-    type = "fund";
+    type = "fund         ";
     level = 1;
     max_level = 1;
     destroy_prob = 0;
+    is_online = false;
 }
 
 Edx::Edx() {
-    type = "edx";
+    type = "edx          ";
     level = 1;
     max_level = 1;
     destroy_prob = 0;
+    is_online = false;
 }

@@ -18,6 +18,12 @@ public:
 
     static Island* Create(int cols, int rows);
     string PrintIsland();
+
+    int GetCols();
+    int GetRows();
+
+    Cell* GetZone(int x, int y);
+    void SetBuilding(int x, int y, const string& type);
 };
 
 

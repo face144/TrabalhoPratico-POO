@@ -2,6 +2,7 @@
 
 Cell::Cell() {
     type = "undef";
+    building = Building::Create("undef");
 }
 
 Cell::~Cell() {
@@ -9,7 +10,6 @@ Cell::~Cell() {
 }
 
 Cell* Cell::Create() {
-    srand(time(nullptr));
     Cell* zone = new Cell;
 
     switch (rand() % 6 + 1) {
@@ -42,6 +42,20 @@ Cell* Cell::Create() {
     return zone;
 }
 
+int Cell::GetOutput() {
+    if (type == "mnt        ") {
+        if (building->GetType() == "minaf        " || building->GetType() == "minac        ")
+            return building->GetOutput() * 2;
+
+    } else if (type == "dsr        ") {
+        if (building->GetType() == "minaf        " || building->GetType() == "minac        ")
+            return building->GetOutput() / 2;
+
+    } else if (type == "pas        ") {
+        if (building->Get == "minaf        " || building->GetType() == "minac        ")
+            return building->GetOutput() / 2;
+}
+
 string Cell::GetType() {
     return type;
 }
@@ -50,7 +64,11 @@ string Cell::GetBuildingType() {
     return building->GetType();
 }
 
-void Cell::SetBuilding(string type) {
-    delete building;
-    this->building = Building::Create(type);
+void Cell::SetBuilding(const string& building_type) {
+    building = nullptr;
+    building = Building::Create(building_type);
+}
+
+Building* Cell::GetBuilding() {
+    return building;
 }

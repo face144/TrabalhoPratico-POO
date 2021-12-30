@@ -1,27 +1,26 @@
 #include "Storage.h"
 
 Storage::Storage() {
-
+    cap = 100;
+    max_cap = 1000;
 }
 
 Storage::~Storage() {
 
 }
 
-void Storage::SetQuantity(int quantity) {
-    this->quantity += quantity;
+int Storage::GetCap() {
+    return cap;
 }
 
-Storage* Storage::Create(string type) {
-    auto* storage = new Storage;
-    storage->quantity = 0;
-
-    if (type == "iron")
-        storage->sell_money = 1;
-
-    return storage;
+int Storage::GetMaxCap() {
+    return max_cap;
 }
 
-int Storage::GetQuantity() {
-    return quantity;
+void Storage::SetCap(int cap) {
+    this->cap = cap;
+}
+
+void Storage::SetMaxCap(int max_cap) {
+    this->max_cap = max_cap;
 }

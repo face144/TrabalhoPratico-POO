@@ -4,40 +4,50 @@
 #include <iostream>
 #include <vector>
 #include "Storage.h"
-#include "Commands.h"
 
 using namespace std;
 
 class Player {
-private:
-    Commands input;
     string username;
-    Storage* iron = Storage::Create("iron");
-
-/*    Storage* money = new Storage;
-    Storage* steel = new Storage;
-    Storage* coal = new Storage;
-    Storage* wood = new Storage;
-    Storage* wood_beam = new Storage;
-    Storage* electricity = new Storage;*/
+    Storage* money;
+    Storage* iron;
+    Storage* steel;
+    Storage* coal;
+    Storage* wood;
+    Storage* wood_beam;
+    Storage* electricity;
 
 public:
     Player();
     ~Player();
 
-    vector <string> SetInput();
-    void SetUsername(string username);
-    void SetIron(int iron);
+    int GetMoney();
+    int GetIron();
+    int GetSteel();
+    int GetCoal();
+    int GetWood();
+    int GetWoodBeam();
+    int GetElectricity();
 
-/*    void SetMoney(int money);
-    void SetSteel(int steel);
-    void SetCoal(int coal);
-    void SetWood(int wood);
-    void SetWoodBeam(int wood_beam);
-    void SetElectricity(int electricity);*/
+    bool TakeMoney(int money);
+    bool TakeIron(int iron);
+    bool TakeSteel(int steel);
+    bool TakeCoal(int coal);
+    bool TakeWood(int wood);
+    bool TakeWoodBeam(int wood_beam);
+    bool TakeElectricity(int electricity);
+
+    void GiveMoney(int money);
+    void GiveIron(int iron);
+    void GiveSteel(int steel);
+    void GiveCoal(int coal);
+    void GiveWood(int wood);
+    void GiveWoodBeam(int wood_beam);
+    void GiveElectricity(int electricity);
 
     string GetUsername();
-    int GetIronQuantity();
+
+    static Player* Create(string username);
 };
 
 

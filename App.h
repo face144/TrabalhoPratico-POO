@@ -2,27 +2,37 @@
 #define TRABALHOPRATICO_POO_RELOADED_APP_H
 
 #include <iostream>
+#include <string>
 #include "Island.h"
 #include "Player.h"
 
 using namespace std;
 
 class App {
-    int day = 0;
-
-    Island* map;
+private:
+    Island* island;
     Player* player;
 
-    string PrintHUD();
-    int CommandHandler();
-    bool PurchaseHandler(string type);
+    int x, y, *day;
+    string type;
+
+    vector <string> input;
+
+    int CheckSyntax();
+    bool CheckCoords();
+    void Execute(int cmd_code);
+    bool CheckPurchase(string type);
+    void GiveResources(int x, int y);
+    void NewDay();
 
 public:
     App();
     ~App();
 
-    void Start();
-    void Loop();
+    void PrintIsland();
+    void PrintHUD();
+    void Init();
+    void GetInput();
 };
 
 

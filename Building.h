@@ -9,21 +9,21 @@ using namespace std;
 class Building {
 protected:
     string type;
-    int level, max_level, output;
+    int level, max_level;
     float destroy_prob;
-    Storage* storage;
-
-
+    bool is_online;
+    int cap;
+    int max_cap;
+    int output;
 
 public:
     Building();
     ~Building();
 
-    static Building* Create(const string& type);
-    int GetOutput() const;
-    string GetType() const;
+    int GetOutput();
 
-    bool LevelUp();
+    static Building* Create(const string& type);
+    string GetType() const;
 
 
 };
@@ -31,6 +31,7 @@ public:
 class Minaf : public Building{
 public:
     Minaf();
+    void levelUp();
 };
 
 class Minac : public Building{

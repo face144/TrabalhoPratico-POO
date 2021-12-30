@@ -1,87 +1,221 @@
 #include "App.h"
 
 App::App() {
-    player = new Player;
+    player = nullptr;
+    island = nullptr;
+    type = "undef";
+    day = nullptr;
+    x = -1;
+    y = -1;
 }
 
 App::~App() {
     delete player;
+    delete island;
+    delete day;
+    type.erase();
+    for (auto &i : input)
+        i.erase();
 }
 
-void App::Start() {
-    player->SetUsername("face");
-    map = Island::Create(3, 3);
+void App::Init() {
+    srand(time(0));
+    player = Player::Create("face");
+    island = Island::Create(3, 3);
+    //input.erase(input.begin(),input.end());
+    day = new int;
+    *day = 1;
 }
 
-void App::Loop() {
-    while(1) {
-        int cmd_code = 1;
-        day++;
-        while (cmd_code != 2) {
-
-            if ( cmd_code == 1) {
-                cout << PrintHUD() << endl;
-                cout << map->PrintIsland() << endl << endl;
-            }
-
-            cout << player->GetUsername() << ':';
-            cmd_code = CommandHandler();
-
-            if ( cmd_code == 0 )
-                cout << "Erro: Comando invalido." << endl;
-            else
-                system("cls");
-        }
-    }
+void App::PrintIsland() {
+    cout << island->PrintIsland();
 }
 
-string App::PrintHUD() {
+void App::PrintHUD() {
     ostringstream oss;
 
-    oss << "Dia " << day << " | Jogador: " << player->GetUsername() << endl << endl;
+    oss << "Dia " << *day << " | Jogador: " << player->GetUsername() << endl << endl;
 
-    oss << "0.00$" << endl;
-    oss << "Madeira      - 0" << " | Vigas de Madeira       - 0" << endl;
-    oss << "Ferro        - " << player->GetIronQuantity() << " | Vigas de Aco           - 0" << endl;
-    oss << "Eletricidade - 0" << " | Eletricidade em pacote - 0" << endl;
+    oss << "Guitos: " << player->GetMoney() << "$" << endl;
+    oss << "Madeira      - " << player->GetWood()        << " | Vigas de Madeira       - " << player->GetWoodBeam() << endl;
+    oss << "Ferro        - " << player->GetIron()        << " | Vigas de Aco           - " << player->GetSteel()    << endl;
+    oss << "Eletricidade - " << player->GetElectricity() << " | Carvaummmmm            - " << player->GetCoal()     << endl;
 
-    return oss.str();
+    cout << oss.str();
 }
 
-int App::CommandHandler() {
-    /**@bug Os comandos sao adicionados ao vetor
-     * em vez de simplesmente substituir o primeiro
-     * indice pelo novo comando o que faz com que a
-     * funcao apenas verifique o primeiro comando escrito
-     */
+void App::GetInput() {
+    int cmd_code;
+    string user_input;
+    cout << player->GetUsername() << ':';
+    getline(cin, user_input);
 
-    vector <string> command = player->SetInput(); /// @def Separa as palavras do comando num vetor
-    int  i = 0, exit_code = -1;
+    istringstream iss( user_input );
+    for ( string keyword ; iss >> keyword ; )
+        this->input.emplace_back(keyword);
 
-    /// @def Validacao do comando
-    if (command.at(i) == "next")
-        exit_code = 2;
+    cmd_code = CheckSyntax();
+    Execute(cmd_code);
+    input.clear();
+}
 
-    else if ( command.at(i) == "cons" )
-        exit_code = 1;
+int App::CheckSyntax() {
+    int i = 0;
 
-    else exit_code = 0;
+    if (input.at(i) == "exec") {
+        return 1;
 
-    for (int j = 0; j < command.size(); ++j) {
-        command.at(i).clear();
+    } else if (input.at(i) == "cons") {
+        if (input.at(++i) == "minaf" ||
+            input.at(i) == "minac" ||
+            input.at(i) == "central" ||
+            input.at(i) == "bat" ||
+            input.at(i) == "fund" ||
+            input.at(i) == "filt") {
+            type = input.at(i);
+            x = stoi(input.at(++i)) - 1;
+            y = stoi(input.at(++i)) - 1;
+            return 2;
+        }
+
+    } else if (input.at(i) == "liga" || input.at(i) == "des") {
+        return 3;
+
+    } else if (input.at(i) == "move") {
+        return 4;
+
+    } else if (input.at(i) == "cont") {
+        return 5;
+
+    } else if (input.at(i) == "list") {
+        return 6;
+
+    } else if (input.at(i) == "next") {
+        return 7;
+
+    } else if (input.at(i) == "save") {
+        return 8;
+
+    } else if (input.at(i) == "vende") {
+        return 10;
+
+    } else if (input.at(i) == "next") {
+        return 11;
+
+    } else if (input.at(i) == "save") {
+        return 12;
+
+    } else { return 0; }
+
+}
+
+bool App::CheckCoords() {
+    //Todo: Redo deeez nuts
+}
+
+void App::Execute(int cmd_code) {
+    switch (cmd_code) {
+        case 1:
+            cout << "Comando nao implementado!\n";
+            break;
+
+        case 2:
+            if ( CheckPurchase(type) )
+                island->GetZone(x, y)->SetBuilding(type);
+            else
+                cout << "Recursos Insuficientes\n";
+            type = "undef";
+            x = -1;
+            y = -1;
+            break;
+
+        case 3:
+            cout << "Comando nao implementado!\n";
+            break;
+
+        case 4:
+            cout << "Comando nao implementado!\n";
+            break;
+
+        case 5:
+            cout << "Comando nao implementado!\n";
+            break;
+
+        case 6:
+            system("cls");
+            PrintHUD();
+            PrintIsland();
+            break;
+
+        case 7:
+            NewDay();
+            break;
+
+        case 8:
+            cout << "Comando nao implementado!\n";
+            break;
+
+        case 10:
+            cout << "Comando nao implementado!\n";
+            break;
+
+        case 11:
+            cout << "Comando nao implementado!\n";
+            break;
+
+        case 12:
+            cout << "Comando nao implementado!\n";
+            break;
+
+        default:
+            cout << "Comando invalido!\n";
+            break;
     }
-    return exit_code;
-
-    //Todo: Execucao do comando
 }
 
-bool App::PurchaseHandler(string type) {
-    //Todo: Validacao (ONLY!!!) de compra
+bool App::CheckPurchase(string type) {
+    if (type == "minaf" || type == "minac")
+        if (player->TakeWoodBeam(10))
+            return true;
 
-    if (true)
-        return true;
-    else
-        return false;
+    if (type == "central")
+        if (player->TakeMoney(15))
+            return true;
+
+    if (type == "bat")
+        if (player->TakeWoodBeam(10) && player->TakeMoney(10))
+            return true;
+
+    if (type == "fund")
+        if (player->TakeMoney(10))
+            return true;
+
+    if (type == "filt")
+        if (player->TakeMoney(20))
+            return true;
+
+    return false;
 }
 
+void App::GiveResources(int x, int y) {
+    string building_type = island->GetZone(x, y)->GetBuildingType();
+        if (island->GetZone(x, y)->GetType() == "dsr        ") {
+            if (island->GetZone(x, y)->GetBuildingType() == "minaf        ") {
+                player->GiveIron(island->GetZone(x, y)->GetBuilding()->GetOutput() / 2);
+            } else if (island->GetZone(x, y)->GetBuildingType() == "minaf        ") {
+                player->GiveIron(island->GetZone(x, y)->GetBuilding()->GetOutput() / 2);
+            }
+        } else {
 
+        }
+}
+
+void App::NewDay() {
+    (*day)++;
+    for (int i = 0; i < island->GetRows(); i++)
+        for (int j = 0; j < island->GetCols(); j++)
+            GiveResources(i, j);
+
+
+    cout << "It's a new daaaaaawwnnn, It's a new daaaaaay!\n";
+}

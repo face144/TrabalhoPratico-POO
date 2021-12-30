@@ -6,6 +6,7 @@
 #include <ctime>
 #include <random>
 #include <chrono>
+#include <thread>
 
 #include "Building.h"
 
@@ -14,7 +15,7 @@ using namespace std;
 class Cell {
 private:
     string type;
-    Building* building = new Building;
+    Building* building;
     //Worker
 
 public:
@@ -24,11 +25,13 @@ public:
     ~Cell();
 
     static Cell* Create();
+    int GetOutput();
     string GetType();
 
     string GetBuildingType();
 
-    void SetBuilding(string type);
+    void SetBuilding(const string& type);
+    Building* GetBuilding();
 };
 
 

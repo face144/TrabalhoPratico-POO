@@ -1,60 +1,160 @@
 #include "Player.h"
 
 Player::Player() {
-
+    username = "undef";
+    money = new Storage;
+    iron = new Storage;
+    steel = new Storage;
+    coal = new Storage;
+    wood = new Storage;
+    wood_beam = new Storage;
+    electricity = new Storage;
 }
 
 Player::~Player() {
     delete iron;
-
-/*    delete money;
     delete steel;
     delete coal;
     delete wood;
     delete wood_beam;
-    delete electricity;*/
+    delete electricity;
 }
 
-vector <string> Player::SetInput() {
-    return this->input.GetInput();
+int Player::GetMoney() {
+    return money->GetCap();
 }
 
-void Player::SetUsername(string username) {
-    this->username = username;
+int Player::GetIron() {
+    return iron->GetCap();
 }
 
-void Player::SetIron(int iron) {
-    this->iron->SetQuantity(iron);
+int Player::GetSteel() {
+    return steel->GetCap();
 }
 
-/*void Player::SetMoney(int money) {
-    this->money->SetQuantity(money);
+int Player::GetCoal() {
+    return coal->GetCap();
 }
 
-void Player::SetSteel(int steel) {
-    this->steel->SetQuantity(steel);
+int Player::GetWood() {
+    return wood->GetCap();
 }
 
-void Player::SetCoal(int coal) {
-    this->coal->SetQuantity(coal);
+int Player::GetWoodBeam() {
+    return wood_beam->GetCap();
 }
 
-void Player::SetWood(int wood) {
-    this->wood->SetQuantity(wood);
+int Player::GetElectricity() {
+    return electricity->GetCap();
 }
 
-void Player::SetWoodBeam(int wood_beam) {
-    this->wood_beam->SetQuantity(wood_beam);
+bool Player::TakeMoney(int money) {
+    if (this->money->GetCap() >= money) {
+        this->money->SetCap(this->money->GetCap() - money);
+        return true;
+    }
+    return false;
 }
 
-void Player::SetElectricity(int electricity) {
-    this->electricity->SetQuantity(electricity);
-}*/
+bool Player::TakeIron(int iron) {
+    if (this->iron->GetCap() >= iron) {
+        this->iron->SetCap(this->iron->GetCap() - iron);
+        return true;
+    }
+    return false;
+}
+
+bool Player::TakeSteel(int steel) {
+    if (this->steel->GetCap() >= steel) {
+        this->steel->SetCap(this->steel->GetCap() - steel);
+        return true;
+    }
+    return false;
+}
+
+bool Player::TakeCoal(int coal) {
+    if (this->coal->GetCap() >= coal) {
+        this->coal->SetCap(this->coal->GetCap() - coal);
+        return true;
+    }
+    return false;
+}
+
+bool Player::TakeWood(int wood) {
+    if (this->wood->GetCap() >= wood) {
+        this->wood->SetCap(this->wood->GetCap() - wood);
+        return true;
+    }
+    return false;
+}
+
+bool Player::TakeWoodBeam(int wood_beam) {
+    if (this->wood_beam->GetCap() >= wood_beam) {
+        this->wood_beam->SetCap(this->wood_beam->GetCap() - wood_beam);
+        return true;
+    }
+    return false;
+}
+
+bool Player::TakeElectricity(int electricity) {
+    if (this->electricity->GetCap() >= electricity) {
+        this->electricity->SetCap(this->electricity->GetCap() - electricity);
+        return true;
+    }
+    return false;
+}
+
+void Player::GiveMoney(int money) {
+    this->money->SetCap(this->money->GetCap() + money);
+    if (this->money->GetCap() > this->money->GetMaxCap())
+        this->money->SetCap(this->money->GetMaxCap());
+}
+
+void Player::GiveIron(int iron) {
+    this->iron->SetCap(this->iron->GetCap() + iron);
+    if (this->iron->GetCap() > this->iron->GetMaxCap())
+        this->iron->SetCap(this->iron->GetMaxCap());
+}
+
+void Player::GiveSteel(int steel) {
+    this->steel->SetCap(this->steel->GetCap() + steel);
+    if (this->steel->GetCap() > this->steel->GetMaxCap())
+        this->steel->SetCap(this->steel->GetMaxCap());
+}
+
+void Player::GiveCoal(int coal) {
+    this->coal->SetCap(this->coal->GetCap() + coal);
+    if (this->coal->GetCap() > this->coal->GetMaxCap())
+        this->coal->SetCap(this->coal->GetMaxCap());
+}
+
+void Player::GiveWood(int wood) {
+    this->wood->SetCap(this->wood->GetCap() + wood);
+    if (this->wood->GetCap() > this->wood->GetMaxCap())
+        this->wood->SetCap(this->wood->GetMaxCap());
+}
+
+void Player::GiveWoodBeam(int wood_beam) {
+    this->wood_beam->SetCap(this->wood_beam->GetCap() + wood_beam);
+    if (this->wood_beam->GetCap() > this->wood_beam->GetMaxCap())
+        this->wood_beam->SetCap(this->wood_beam->GetMaxCap());
+}
+
+void Player::GiveElectricity(int electricity) {
+    this->electricity->SetCap(this->electricity->GetCap() + electricity);
+    if (this->electricity->GetCap() > this->electricity->GetMaxCap())
+        this->electricity->SetCap(this->electricity->GetMaxCap());
+}
 
 string Player::GetUsername() {
     return username;
 }
 
-int Player::GetIronQuantity() {
-    return iron->GetQuantity();
+Player* Player::Create(string username) {
+    auto player = new Player;
+
+    //Assign variables
+    player->username = "face";
+
+    return player;
 }
