@@ -1,3 +1,0 @@
-C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/cmake-build-debug-coverage/CMakeFiles/TrabalhoPratico_POO_Reloaded.dir
-C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/cmake-build-debug-coverage/CMakeFiles/edit_cache.dir
-C:/Users/jedua/Documents/GitHub/TrabalhoPratico-POO-Reloaded/cmake-build-debug-coverage/CMakeFiles/rebuild_cache.dir
