@@ -42,18 +42,29 @@ Cell* Cell::Create() {
     return zone;
 }
 
+void Cell::DestroyProbHandler() {
+    if (rand() % 100 < building->GetDestroyProb() * 100)
+        delete building;
+
+    building = Building::Create("undef");
+}
+
 int Cell::GetOutput() {
-    if (type == "mnt        ") {
-        if (building->GetType() == "minaf        " || building->GetType() == "minac        ")
-            return building->GetOutput() * 2;
+    if (building->IsOnline()) {
+        if (type == "mnt        ") {
+            if (building->GetType() == "minaf        " || building->GetType() == "minac        ")
+                return building->GetOutput() * 2;
 
-    } else if (type == "dsr        ") {
-        if (building->GetType() == "minaf        " || building->GetType() == "minac        ")
-            return building->GetOutput() / 2;
+        } else if (type == "dsr        ") {
+            if (building->GetType() == "minaf        " || building->GetType() == "minac        ")
+                return building->GetOutput() / 2;
 
-    } else if (type == "pas        ") {
-        if (building->Get == "minaf        " || building->GetType() == "minac        ")
-            return building->GetOutput() / 2;
+        } else if (type == "pas        ")
+            if (building->GetType() == "minaf        " || building->GetType() == "minac        ")
+                return building->GetOutput() / 2;
+    }
+    return 0;
+
 }
 
 string Cell::GetType() {
@@ -65,7 +76,6 @@ string Cell::GetBuildingType() {
 }
 
 void Cell::SetBuilding(const string& building_type) {
-    building = nullptr;
     building = Building::Create(building_type);
 }
 

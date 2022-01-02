@@ -20,7 +20,11 @@ public:
     Building();
     ~Building();
 
-    int GetOutput();
+    bool IsOnline() const;
+    void SetOffline();
+    void SetOnline();
+    float GetDestroyProb() const;
+    int GetOutput() const;
 
     static Building* Create(const string& type);
     string GetType() const;
@@ -37,6 +41,7 @@ public:
 class Minac : public Building{
 public:
     Minac();
+    void levelUp();
 };
 
 class Central : public Building{

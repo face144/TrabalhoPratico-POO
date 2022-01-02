@@ -30,9 +30,9 @@ string Island::PrintIsland() {
             oss << " -----------------";
         oss << endl;
 
-        for (int i = 0; i < cols; ++i)
+        /*for (int i = 0; i < cols; ++i)
             oss << "|ID:" << zone.at(j * rows + i)->id << "             ";
-        oss << '|' << endl;
+        oss << '|' << endl;*/
 
         for (int i = 0; i < cols; ++i)
             oss << "|Bioma:" << zone.at(j * rows + i)->GetType();

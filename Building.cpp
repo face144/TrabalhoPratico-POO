@@ -5,20 +5,34 @@ Building::Building() {
     type = "             ";
     level = 0;
     max_level = 0;
-    destroy_prob = 0 ;
-    is_online = false;
+    destroy_prob = 0;
+    is_online = 0;
     cap = 0;
     max_cap = 0;
     output = 0;
 }
 
-int Building::GetOutput(){
+int Building::GetOutput() const{
     return output;
 }
 
 Building::~Building() { }
 
+bool Building::IsOnline() const {
+    return is_online;
+}
 
+void Building::SetOffline() {
+    is_online = false;
+}
+
+void Building::SetOnline() {
+    is_online = true;
+}
+
+float Building::GetDestroyProb() const {
+    return destroy_prob;
+}
 
 string Building::GetType() const {
     return type;
@@ -55,6 +69,11 @@ Minaf::Minaf() {
 
 }
 
+void Minaf::levelUp() {
+    if(level > 0 || level < 5)
+        ++level;
+}
+
 Minac::Minac() {
     type = "minac        ";
     level = 1;
@@ -71,7 +90,6 @@ Central::Central() {
     destroy_prob = 0;
     is_online = false;
     output = 1;
-
 }
 
 Bat::Bat() {

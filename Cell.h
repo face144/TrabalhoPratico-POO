@@ -25,6 +25,7 @@ public:
     ~Cell();
 
     static Cell* Create();
+    void DestroyProbHandler();
     int GetOutput();
     string GetType();
 
