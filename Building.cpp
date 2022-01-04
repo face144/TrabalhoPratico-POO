@@ -6,7 +6,8 @@ Building::Building() {
     level = 0;
     max_level = 0;
     destroy_prob = 0;
-    is_online = 0;
+    is_online = true;
+    needs_worker = true;
     cap = 0;
     max_cap = 0;
     output = 0;
@@ -22,12 +23,20 @@ bool Building::IsOnline() const {
     return is_online;
 }
 
+bool Building::NeedsWorker() const {
+    return needs_worker;
+}
+
 void Building::SetOffline() {
     is_online = false;
 }
 
 void Building::SetOnline() {
     is_online = true;
+}
+
+int Building::GetLevel() {
+    return level;
 }
 
 float Building::GetDestroyProb() const {
@@ -63,15 +72,20 @@ Minaf::Minaf() {
     max_level = 5;
     destroy_prob = 0.15;
     is_online = false;
+    needs_worker = true;
     cap = 0;
     max_cap = 0;
     output = 2;
 
 }
 
-void Minaf::levelUp() {
-    if(level > 0 || level < 5)
-        ++level;
+bool Minaf::levelUp() {
+    if(level >= 5)
+        return false;
+
+    level++;
+    output++;
+    return true;
 }
 
 Minac::Minac() {

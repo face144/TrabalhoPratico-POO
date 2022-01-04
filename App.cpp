@@ -7,12 +7,6 @@ App::App() {
     day = nullptr;
     x = -1;
     y = -1;
-    minaf_cost = 10;
-    minac_cost = 10;
-    central_cost = 15;
-    bat_cost_money = 10;
-    bat_cost_steel = 10;
-    fund_cost = 10;
 }
 
 App::~App() {
@@ -25,7 +19,7 @@ App::~App() {
 }
 
 void App::Init() {
-    srand(time(0));
+    srand(time(nullptr));
     player = Player::Create("face");
     island = Island::Create(5, 5);
     //input.erase(input.begin(),input.end());
@@ -93,6 +87,7 @@ int App::CheckSyntax() {
         return 4;
 
     } else if (input.at(i) == "cont") {
+        type = input.at(++i);
         return 5;
 
     } else if (input.at(i) == "list") {
@@ -112,13 +107,12 @@ int App::CheckSyntax() {
     } else if (input.at(i) == "vende") {
         return 10;
 
-    } else if (input.at(i) == "next") {
-        return 11;
-
     } else if (input.at(i) == "save") {
         return 12;
 
-    } else if (input.at(i) == "nivel"){
+    } else if (input.at(i) == "lvlup"){
+        x = stoi(input.at(++i)) - 1;
+        y = stoi(input.at(++i)) - 1;
         return 13;
 
     } else { return 0; }
@@ -136,7 +130,7 @@ void App::Execute(int cmd_code) {
             break;
 
         case 2:
-            if ( CheckPurchase(type) )
+            if ( CheckPurchase() )
                 island->GetZone(x, y)->SetBuilding(type);
             else
                 cout << "Recursos Insuficientes\n";
@@ -159,7 +153,11 @@ void App::Execute(int cmd_code) {
             break;
 
         case 5:
-            cout << "Comando nao implementado!\n";
+            //Todo: Criar funcao para ver os guitos e por o que esta aqui nessa funcao;
+            Worker::Create(type, day, worker_cnt);
+
+            worker_cnt++;
+            type = "undef";
             break;
 
         case 6:
@@ -187,19 +185,16 @@ void App::Execute(int cmd_code) {
 
         case 10:
             cout << "Comando nao implementado!\n";
-            break;
-
-        case 11:
-            cout << "Comando nao implementado!\n";
-            break;
 
         case 12:
             cout << "Comando nao implementado!\n";
             break;
 
         case 13:
-
-
+            LevelUp();
+            x = -1;
+            y = -1;
+            break;
 
         default:
             cout << "Comando invalido!\n";
@@ -207,86 +202,88 @@ void App::Execute(int cmd_code) {
     }
 }
 
-bool App::CheckPurchase(string type) {
-    if (type == "minaf" || type == "minac")
+bool App::CheckPurchase() {
+    if (type == "minaf" || type == "minac") {
         if (island->GetZone(x, y)->GetType() == mnt)
-            return player->TakeWoodBeam(10 * 2);
+            return player->TakeWoodBeam(mina_cost * 2);
         else
-            return player->TakeWoodBeam(10);
+            return player->TakeWoodBeam(mina_cost);
 
-    if (type == "central")
+    }
+
+    if (type == "central") {
         if (island->GetZone(x, y)->GetType() == mnt)
-            return player->TakeMoney(15 * 2);
+            return player->TakeMoney(central_cost * 2);
         else
-            return player->TakeMoney(15);
+            return player->TakeMoney(central_cost);
+    }
 
-    if (type == "bat")
+    if (type == "bat") {
         if (island->GetZone(x, y)->GetType() == mnt)
-            return player->TakeWoodBeam(10 * 2) && player->TakeMoney(10 * 2);
+            return player->TakeSteel(bat_cost_steel * 2) && player->TakeMoney(bat_cost_money * 2);
         else
-            return player->TakeWoodBeam(10) && player->TakeMoney(10);
+            return player->TakeSteel(bat_cost_steel) && player->TakeMoney(bat_cost_money);
+    }
 
-    if (type == "fund")
+    if (type == "fund") {
         if (island->GetZone(x, y)->GetType() == mnt)
-            return player->TakeMoney(10 * 2);
+            return player->TakeMoney(fund_cost * 2);
         else
-            return player->TakeMoney(10);
+            return player->TakeMoney(fund_cost);
+    }
 
-    if (type == "filt")
+    if (type == "filt") {
         if (island->GetZone(x, y)->GetType() == mnt)
-            return player->TakeMoney(20 * 2);
+            return player->TakeMoney(filt_cost * 2);
         else
-            return player->TakeMoney(20);
-
+            return player->TakeMoney(filt_cost);
+    }
     return false;
 }
 
-bool App::CheckLevelUp(int x, int y) {  //Trocar valores 
+bool App::LevelUp() {  //Trocar valores
     if(island->GetZone(x, y)->GetBuildingType() == minaf) {
-        if (player->TakeWoodBeam(10))
-            return player->TakeWoodBeam(10);
-        else if (player->TakeMoney(100))
-            return player->TakeMoney(100);
+        if (player->TakeWoodBeam(1) && player->TakeMoney(15)) {
+            if (island->GetZone(x, y)->GetBuilding()->LevelUp())
+                cout << "Edifico melhorado para o nivel " << island->GetZone(x, y)->GetBuilding()->GetLevel() << ".\n";
+            else
+                cout << "Recursos insuficientes!\n";
+        }
 
-    } else if(island->GetZone(x, y)->GetBuildingType() == minac){
-        if(player->TakeWoodBeam(10))
-            return player->TakeWoodBeam(10);
-        else if (player->TakeMoney(100))
-            return player->TakeMoney(100);
-    
-    } else if(island->GetZone(x, y)->GetBuildingType() == central){
-         if (player->TakeMoney(15))
-            return player->TakeMoney(15);
+    } else if(island->GetZone(x, y)->GetBuildingType() == minac) {
+        if (player->TakeWoodBeam(1) && player->TakeMoney(10)) {
+            if (island->GetZone(x, y)->GetBuilding()->LevelUp())
+                cout << "Edifico melhorado para o nivel " << island->GetZone(x, y)->GetBuilding()->GetLevel() << ".\n";
+            else
+                cout << "Recursos insuficientes!\n";
+        }
 
     } else if(island->GetZone(x, y)->GetBuildingType() == bat) {
-        
-        if (player->TakeMoney(10) && player->TakeWoodBeam(10))
-            return (player->TakeMoney(10) && player->TakeWoodBeam(10));
-        
-        else if(player->TakeMoney(10) && player->TakeSteel(10))
-            return (player->TakeMoney(10) && player->TakeSteel(10));
-    
-    } else if (island->GetZone(x, y)->GetBuildingType() == fund){
-        
-        if(player->TakeMoney(10))
-            return (player->TakeMoney(10));
-    } 
- 
-    
-        
+        if (player->TakeMoney(5)) {
+            if (island->GetZone(x, y)->GetBuilding()->LevelUp())
+                cout << "Edifico melhorado para o nivel " << island->GetZone(x, y)->GetBuilding()->GetLevel() << ".\n";
+            else
+                cout << "Recursos insuficientes!\n";
+        }
 
+    } else if (island->GetZone(x, y)->GetBuildingType() == "undef") {
+        cout << "Nenhum edificio nessa zona!\n";
 
-
+    } else {
+        cout << "Esse edificio nao pode ser melhorado.\n";
+    }
 }
 
 void App::GiveResources(int x, int y) {
     string building_type = island->GetZone(x, y)->GetBuildingType();
     if (island->GetZone(x, y)->GetType() == dsr) {
         if (island->GetZone(x, y)->GetBuildingType() == minaf) {
-            player->GiveIron(island->GetZone(x, y)->GetBuilding()->GetOutput() / 2);
+            if (island->GetZone(x,y)->GetWorker() != nullptr)
+                player->GiveIron(island->GetZone(x, y)->GetBuilding()->GetOutput() / 2);
 
         } else if (island->GetZone(x, y)->GetBuildingType() == minac) {
-            player->GiveIron(island->GetZone(x, y)->GetBuilding()->GetOutput() / 2);
+            if (island->GetZone(x,y)->GetWorker() != nullptr)
+                player->GiveIron(island->GetZone(x, y)->GetBuilding()->GetOutput() / 2);
         }
     } else if (island->GetZone(x, y)->GetType() == mnt) {
         if (island->GetZone(x, y)->GetBuildingType() == minaf) {

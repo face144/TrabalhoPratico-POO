@@ -8,6 +8,7 @@
 #include <chrono>
 #include <thread>
 
+#include "Worker.h"
 #include "Building.h"
 
 using namespace std;
@@ -16,7 +17,7 @@ class Cell {
 private:
     string type;
     Building* building;
-    //Worker
+    Worker* worker;
 
 public:
     int id;
@@ -28,7 +29,7 @@ public:
     void DestroyProbHandler();
     int GetOutput();
     string GetType();
-
+    Worker* GetWorker();
     string GetBuildingType();
 
     void SetBuilding(const string& type);

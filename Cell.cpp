@@ -2,7 +2,8 @@
 
 Cell::Cell() {
     type = "undef";
-    building = Building::Create("undef");
+    building = nullptr;
+    worker = nullptr;
 }
 
 Cell::~Cell() {
@@ -39,14 +40,15 @@ Cell* Cell::Create() {
             break;
 
     }
+    zone->building = Building::Create("undef");
     return zone;
 }
 
 void Cell::DestroyProbHandler() {
-    if (rand() % 100 < building->GetDestroyProb() * 100)
+    if (rand() % 100 < building->GetDestroyProb() * 100) {
         delete building;
-
-    building = Building::Create("undef");
+        building = Building::Create("undef");
+    }
 }
 
 int Cell::GetOutput() {
@@ -69,6 +71,10 @@ int Cell::GetOutput() {
 
 string Cell::GetType() {
     return type;
+}
+
+Worker* Cell::GetWorker() {
+    return worker;
 }
 
 string Cell::GetBuildingType() {

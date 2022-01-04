@@ -12,6 +12,7 @@ protected:
     int level, max_level;
     float destroy_prob;
     bool is_online;
+    bool needs_worker;
     int cap;
     int max_cap;
     int output;
@@ -21,8 +22,10 @@ public:
     ~Building();
 
     bool IsOnline() const;
+    bool NeedsWorker() const;
     void SetOffline();
     void SetOnline();
+    int GetLevel();
     float GetDestroyProb() const;
     int GetOutput() const;
 
@@ -35,13 +38,13 @@ public:
 class Minaf : public Building{
 public:
     Minaf();
-    void levelUp();
+    bool levelUp();
 };
 
 class Minac : public Building{
 public:
     Minac();
-    void levelUp();
+    bool levelUp();
 };
 
 class Central : public Building{
