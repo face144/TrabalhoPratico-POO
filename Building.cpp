@@ -19,6 +19,15 @@ int Building::GetOutput() const{
 
 Building::~Building() { }
 
+bool Building::LevelUp() {
+    if(level >= 5)
+        return false;
+
+    level++;
+    output++;
+    return true;
+}
+
 bool Building::IsOnline() const {
     return is_online;
 }
@@ -77,15 +86,6 @@ Minaf::Minaf() {
     max_cap = 0;
     output = 2;
 
-}
-
-bool Minaf::levelUp() {
-    if(level >= 5)
-        return false;
-
-    level++;
-    output++;
-    return true;
 }
 
 Minac::Minac() {

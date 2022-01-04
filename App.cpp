@@ -4,7 +4,8 @@ App::App() {
     player = nullptr;
     island = nullptr;
     type = "undef";
-    day = nullptr;
+    day = new int;
+    worker_cnt = new int;
     x = -1;
     y = -1;
 }
@@ -23,8 +24,10 @@ void App::Init() {
     player = Player::Create("face");
     island = Island::Create(5, 5);
     //input.erase(input.begin(),input.end());
-    day = new int;
+    //day = new int;
     *day = 1;
+    *worker_cnt = 1;
+
 }
 
 void App::PrintIsland() {
@@ -62,7 +65,11 @@ void App::GetInput() {
 int App::CheckSyntax() {
     int i = 0;
 
-    if (input.at(i) == "exec") {
+    if (input.empty()) {
+        return 0;
+
+    } else if (input.at(i) == "exec") {
+        type = input.at(++i);
         return 1;
 
     } else if (input.at(i) == "cons") {
@@ -126,7 +133,12 @@ bool App::CheckCoords() {
 void App::Execute(int cmd_code) {
     switch (cmd_code) {
         case 1:
-            cout << "Comando nao implementado!\n";
+            if (!ReadFromFile())
+                cout << "Houve um problema ao executar o ficheiro '" << type << "'.\n";
+            else
+                cout << "Ficheiro " << type << "executado com sucesso.\n";
+            system("pause");
+            system("cls");
             break;
 
         case 2:
@@ -154,10 +166,15 @@ void App::Execute(int cmd_code) {
 
         case 5:
             //Todo: Criar funcao para ver os guitos e por o que esta aqui nessa funcao;
-            Worker::Create(type, day, worker_cnt);
+            /*Worker::Create(type, day, worker_cnt);
+            int *_x, *_y;
+            *_x = 1;
+            *_y = 1;
+            island->MoveWorker("1.1", _x, _y);
 
             worker_cnt++;
-            type = "undef";
+            type = "undef";*/
+            cout << "Comando nao implementado!\n";
             break;
 
         case 6:
@@ -200,6 +217,27 @@ void App::Execute(int cmd_code) {
             cout << "Comando invalido!\n";
             break;
     }
+}
+
+bool App::ReadFromFile() {
+    ifstream ifs;
+    string command;
+
+    ifs.open(type);
+    if (ifs == nullptr)
+        return false;
+
+        while (!ifs.eof()) {
+            getline(ifs, command);
+            istringstream iss(command);
+            for ( string keyword ; iss >> keyword ; )
+                this->input.emplace_back(keyword);
+            int cmd_code = CheckSyntax();
+            Execute(cmd_code);
+            input.clear();
+        }
+
+    return true;
 }
 
 bool App::CheckPurchase() {
@@ -278,26 +316,26 @@ void App::GiveResources(int x, int y) {
     string building_type = island->GetZone(x, y)->GetBuildingType();
     if (island->GetZone(x, y)->GetType() == dsr) {
         if (island->GetZone(x, y)->GetBuildingType() == minaf) {
-            if (island->GetZone(x,y)->GetWorker() != nullptr)
+            //if (island->GetZone(x,y)->GetWorker(type) != nullptr)
                 player->GiveIron(island->GetZone(x, y)->GetBuilding()->GetOutput() / 2);
 
         } else if (island->GetZone(x, y)->GetBuildingType() == minac) {
-            if (island->GetZone(x,y)->GetWorker() != nullptr)
-                player->GiveIron(island->GetZone(x, y)->GetBuilding()->GetOutput() / 2);
+            //if (island->GetZone(x,y)->GetWorker(type) != nullptr)
+                player->GiveCoal(island->GetZone(x, y)->GetBuilding()->GetOutput() / 2);
         }
     } else if (island->GetZone(x, y)->GetType() == mnt) {
         if (island->GetZone(x, y)->GetBuildingType() == minaf) {
             player->GiveIron(island->GetZone(x, y)->GetBuilding()->GetOutput() * 2);
 
         } else if (island->GetZone(x, y)->GetBuildingType() == minac) {
-            player->GiveIron(island->GetZone(x, y)->GetBuilding()->GetOutput() * 2);
+            player->GiveCoal(island->GetZone(x, y)->GetBuilding()->GetOutput() * 2);
         }
     } else {
         if (island->GetZone(x, y)->GetBuildingType() == minaf) {
             player->GiveIron(island->GetZone(x, y)->GetBuilding()->GetOutput());
 
         } else if (island->GetZone(x, y)->GetBuildingType() == minac) {
-            player->GiveIron(island->GetZone(x, y)->GetBuilding()->GetOutput());
+            player->GiveCoal(island->GetZone(x, y)->GetBuilding()->GetOutput());
         }
     }
 }

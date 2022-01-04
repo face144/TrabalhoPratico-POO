@@ -2,6 +2,9 @@
 #define TRABALHOPRATICO_POO_RELOADED_CELL_H
 
 #include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
 #include <cstdlib>
 #include <ctime>
 #include <random>
@@ -17,7 +20,7 @@ class Cell {
 private:
     string type;
     Building* building;
-    Worker* worker;
+    vector <Worker*> worker_list;
 
 public:
     int id;
@@ -28,8 +31,12 @@ public:
     static Cell* Create();
     void DestroyProbHandler();
     int GetOutput();
+    string GetWorkerCount();
     string GetType();
-    Worker* GetWorker();
+    string GetWorkerList();
+    Worker* GetWorker(string id);
+    void SetWorker(Worker* worker);
+    void DeleteWorker(string id);
     string GetBuildingType();
 
     void SetBuilding(const string& type);

@@ -43,11 +43,11 @@ string Island::PrintIsland() {
         oss << '|' << endl;
 
         for (int i = 0; i < cols; ++i)
-            oss << "|Trab.:           ";
+            oss << "|Trab.:" << zone.at(j * rows + i)->GetWorkerList();
         oss << '|' << endl;
 
         for (int i = 0; i < cols; ++i)
-            oss << "|Total:           ";
+            oss << "|Total:" << zone.at(j * rows + i)->GetWorkerCount();
         oss << '|' << endl;
     }
 
@@ -65,6 +65,18 @@ int Island::GetCols() {
 
 int Island::GetRows() {
     return rows;
+}
+
+bool Island::MoveWorker(string id, int* x, int* y) {
+    for (auto &temp_zone : zone) { //Todo: Fix sigsegv here!
+        if (temp_zone->GetWorker(id) != nullptr) {
+            Worker *temp_worker = temp_zone->GetWorker(id);
+            GetZone(*x, *y)->SetWorker(temp_worker);
+            temp_zone->DeleteWorker(id);
+            return true;
+        }
+    }
+    return false;
 }
 
 Cell* Island::GetZone(const int x, const int y) {

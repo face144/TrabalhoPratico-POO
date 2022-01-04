@@ -12,6 +12,7 @@ class Worker {
 protected:
     string id;
     vector <string> buildings;
+    string type;
 
     void AssignID(int* day, int* worker_nr);
 
@@ -19,6 +20,8 @@ public:
     Worker();
     ~Worker();
 
+    string GetType();
+    string GetID();
     static Worker* Create(const string& type, int* day, int* worker_nr);
 };
 

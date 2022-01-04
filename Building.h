@@ -21,6 +21,7 @@ public:
     Building();
     ~Building();
 
+    bool LevelUp();
     bool IsOnline() const;
     bool NeedsWorker() const;
     void SetOffline();
@@ -38,13 +39,11 @@ public:
 class Minaf : public Building{
 public:
     Minaf();
-    bool levelUp();
 };
 
 class Minac : public Building{
 public:
     Minac();
-    bool levelUp();
 };
 
 class Central : public Building{

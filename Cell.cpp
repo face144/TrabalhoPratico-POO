@@ -3,7 +3,6 @@
 Cell::Cell() {
     type = "undef";
     building = nullptr;
-    worker = nullptr;
 }
 
 Cell::~Cell() {
@@ -73,8 +72,49 @@ string Cell::GetType() {
     return type;
 }
 
-Worker* Cell::GetWorker() {
-    return worker;
+string Cell::GetWorkerCount() {
+    ostringstream oss;
+    oss << worker_list.size() << ' ';
+    string wrkr_cnt = oss.str();
+    if (wrkr_cnt.size() > 11)
+        wrkr_cnt.resize(11);
+    else
+        wrkr_cnt.resize(11, ' ');
+    return wrkr_cnt;
+}
+
+string Cell::GetWorkerList() {
+    ostringstream oss;
+    if (!worker_list.empty()) {
+        for (auto &worker: worker_list)
+            oss << worker->GetType() << ' ';
+    }
+    string wrkr_cnt = oss.str();
+    if (wrkr_cnt.size() > 11)
+        wrkr_cnt.resize(11);
+    else
+        wrkr_cnt.resize(11, ' ');
+    return wrkr_cnt;
+}
+
+Worker* Cell::GetWorker(string id) {
+    if (!worker_list.empty())
+        for (auto &worker : worker_list) {
+            if (worker->GetID() == id)
+                return worker;
+        }
+    return nullptr;
+}
+
+void Cell::SetWorker(Worker* worker) {
+    worker_list.emplace_back(worker);
+}
+
+void Cell::DeleteWorker(string id) {
+    for (auto &worker : worker_list) {
+        if (worker->GetID() == id)
+            delete worker;
+    }
 }
 
 string Cell::GetBuildingType() {

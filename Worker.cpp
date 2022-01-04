@@ -1,7 +1,7 @@
 #include "Worker.h"
 
 Worker::Worker() {
-    id = nullptr;
+    id = "undef";
 }
 
 Worker::~Worker() {
@@ -17,6 +17,14 @@ void Worker::AssignID(int* day, int* worker_nr) {
     id = oss.str();
 }
 
+string Worker::GetType() {
+    return type;
+}
+
+string Worker::GetID() {
+    return id;
+}
+
 Worker* Worker::Create(const string& type, int* day, int* worker_nr) {
     Worker* worker;
     if (type == "operario") {
@@ -30,6 +38,7 @@ Worker* Worker::Create(const string& type, int* day, int* worker_nr) {
 }
 
 Operario::Operario() {
+    type = "O";
     buildings.emplace_back(fund);
     buildings.emplace_back(central);
 }

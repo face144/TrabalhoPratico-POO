@@ -22,6 +22,8 @@ public:
     int GetCols();
     int GetRows();
 
+    bool MoveWorker(string id, int* x, int* y);
+
     Cell* GetZone(int x, int y);
     void SetBuilding(int x, int y, const string& type);
 };

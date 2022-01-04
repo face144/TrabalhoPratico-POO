@@ -1,5 +1,3 @@
-#include <iostream>
-#include <istream>
 #include "Interface.h"
 
 using namespace std;

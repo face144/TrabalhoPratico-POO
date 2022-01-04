@@ -1,13 +1,10 @@
 #ifndef TRABALHOPRATICO_POO_RELOADED_APP_H
 #define TRABALHOPRATICO_POO_RELOADED_APP_H
 
-#include <iostream>
-#include <string>
+#include <fstream>
 #include "Island.h"
 #include "Player.h"
 #include "Codes.h"
-
-using namespace std;
 
 class App {
 private:
@@ -27,6 +24,7 @@ private:
     bool LevelUp();
     void GiveResources(int x, int y);
     void NewDay();
+    bool ReadFromFile();
 
 public:
     App();
