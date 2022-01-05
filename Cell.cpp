@@ -43,29 +43,15 @@ Cell* Cell::Create() {
     return zone;
 }
 
-void Cell::DestroyProbHandler() {
+void Cell::DestroyProbHandler(int* day) {
+    if (type == pnt && building->GetDay() >= 10) {
+        delete building;
+        building = Building::Create("undef");
+    }
     if (rand() % 100 < building->GetDestroyProb() * 100) {
         delete building;
         building = Building::Create("undef");
     }
-}
-
-int Cell::GetOutput() {
-    if (building->IsOnline()) {
-        if (type == "mnt        ") {
-            if (building->GetType() == "minaf        " || building->GetType() == "minac        ")
-                return building->GetOutput() * 2;
-
-        } else if (type == "dsr        ") {
-            if (building->GetType() == "minaf        " || building->GetType() == "minac        ")
-                return building->GetOutput() / 2;
-
-        } else if (type == "pas        ")
-            if (building->GetType() == "minaf        " || building->GetType() == "minac        ")
-                return building->GetOutput() / 2;
-    }
-    return 0;
-
 }
 
 string Cell::GetType() {

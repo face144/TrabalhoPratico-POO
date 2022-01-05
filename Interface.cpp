@@ -29,16 +29,20 @@ void Interface::SplashScreen() { //Todo: Apagar dps...
     cout << "OOOOOOOOO   OOOOOOOOOOOOOOOOOOOOOOOOOOOOO   OOOOOOOOOOOOOOOOOOOO   OOOOOO   OOOOOOOOOOOOOOOOOOOO   OOOOOOOOO\n";
     cout << "OOOOOOOOO   OOOOOOOOOOOOOOOOOOOOOOOOOOOOO                          OOOOOO                          OOOOOOOOO\n";
     cout << "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n";
-    cout << "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n";
-    cout << "                                        A carregar jogo...                                                  \n";
+    cout << "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO TP - 2021/22\n";
+    cout << "                                        Trabalho realizado por:                                             \n";
+    cout << "                                        Jose Parente - a2020142069                                          \n";
+    cout << "                                        Goncalo Leite - (nr de aluno)                                       \n\n";
+
+    cout << "                                        A carregar simulacao...                                             \n";
     cout << "                                        Por favor aguarde.                                                  \n";
-    sleep_for(seconds(2));
+    sleep_for(seconds(4));
     system("cls");
 }
 
 void Interface::Start() {
     ShowWindow(GetConsoleWindow(), SW_MAXIMIZE); //Todo: Also apagar dps...
-    SplashScreen();
+    //SplashScreen();
     game->Init();
 }
 

@@ -2,7 +2,9 @@
 #define TRABALHOPRATICO_POO_RELOADED_BUILDING_H
 
 #include <iostream>
+#include "Codes.h"
 #include "Storage.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -16,11 +18,14 @@ protected:
     int cap;
     int max_cap;
     int output;
+    int day;
 
 public:
     Building();
     ~Building();
 
+    void NextDay();
+    int GetDay();
     bool LevelUp();
     bool IsOnline() const;
     bool NeedsWorker() const;
@@ -38,26 +43,31 @@ public:
 
 class Minaf : public Building{
 public:
+    void GetOutput(Player* player) const;
     Minaf();
 };
 
 class Minac : public Building{
 public:
+    void GetOutput(Player* player) const;
     Minac();
 };
 
 class Central : public Building{
 public:
+    void GetOutput(Player* player) const;
     Central();
 };
 
 class Bat : public Building{
 public:
+    void GetOutput(Player* player) const;
     Bat();
 };
 
 class Fund : public Building{
 public:
+    void GetOutput(Player* player) const;
     Fund();
 };
 

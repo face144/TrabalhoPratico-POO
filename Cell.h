@@ -23,14 +23,13 @@ private:
     vector <Worker*> worker_list;
 
 public:
-    int id;
+    //int id;
 
     Cell();
     ~Cell();
 
     static Cell* Create();
-    void DestroyProbHandler();
-    int GetOutput();
+    void DestroyProbHandler(int* day);
     string GetWorkerCount();
     string GetType();
     string GetWorkerList();

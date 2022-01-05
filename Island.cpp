@@ -16,7 +16,7 @@ Island* Island::Create(int cols, int rows) {
     map->rows = rows;
     for (int i = 0; i < cols * rows; ++i) {
         map->zone.push_back(Cell::Create());
-        map->zone.at(i)->id = i;
+        //map->zone.at(i)->id = i;
     }
 
     return map;

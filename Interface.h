@@ -17,7 +17,8 @@ public:
     ~Interface();
 
     void Start();
-    void Loop();
+
+    [[noreturn]] void Loop();
 
 };
 

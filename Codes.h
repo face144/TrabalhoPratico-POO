@@ -8,6 +8,7 @@
 #define fund_cost 10
 #define filt_cost 20
 
+#define undef "             "
 #define minaf "minaf        "
 #define minac "minac        "
 #define central "central      "

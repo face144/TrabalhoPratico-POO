@@ -117,9 +117,11 @@ void Player::GiveIron(int iron) {
 }
 
 void Player::GiveSteel(int steel) {
-    this->steel->SetCap(this->steel->GetCap() + steel);
-    if (this->steel->GetCap() > this->steel->GetMaxCap())
-        this->steel->SetCap(this->steel->GetMaxCap());
+    if (TakeIron(1) && TakeCoal(1)) {
+        this->steel->SetCap(this->steel->GetCap() + steel);
+        if (this->steel->GetCap() > this->steel->GetMaxCap())
+            this->steel->SetCap(this->steel->GetMaxCap());
+    }
 }
 
 void Player::GiveCoal(int coal) {

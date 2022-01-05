@@ -11,13 +11,18 @@ Building::Building() {
     cap = 0;
     max_cap = 0;
     output = 0;
-}
-
-int Building::GetOutput() const{
-    return output;
+    day = 1;
 }
 
 Building::~Building() { }
+
+void Building::NextDay() {
+    day++;
+}
+
+int Building::GetDay() {
+    return day;
+}
 
 bool Building::LevelUp() {
     if(level >= 5)
@@ -50,6 +55,10 @@ int Building::GetLevel() {
 
 float Building::GetDestroyProb() const {
     return destroy_prob;
+}
+
+int Building::GetOutput() const {
+    return output;
 }
 
 string Building::GetType() const {
@@ -88,6 +97,7 @@ Minaf::Minaf() {
 
 }
 
+
 Minac::Minac() {
     type = "minac        ";
     level = 1;
@@ -112,7 +122,6 @@ Bat::Bat() {
     max_level = 5;
     destroy_prob = 0;
     is_online = false;
-
 }
 
 Fund::Fund() {
