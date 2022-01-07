@@ -31,6 +31,7 @@ public:
     bool NeedsWorker() const;
     void SetOffline();
     void SetOnline();
+    void SetLevel(int lvl);
     int GetLevel();
     float GetDestroyProb() const;
     int GetOutput() const;

@@ -4,6 +4,8 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <fstream>
+#include <string>
 #include "Cell.h"
 
 using namespace std;
@@ -19,8 +21,11 @@ public:
     static Island* Create(int cols, int rows);
     string PrintIsland();
 
-    int GetCols();
-    int GetRows();
+    int GetCols() const;
+    int GetRows() const;
+    string GetZonesSaveData() const;
+    string GetIslandSaveData() const;
+    void LoadData(string filename);
 
     bool MoveWorker(string id, int* x, int* y);
 

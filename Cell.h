@@ -28,11 +28,12 @@ public:
     Cell();
     ~Cell();
 
-    static Cell* Create();
+    static Cell* Create(const string& type = undef);
     void DestroyProbHandler(int* day);
     string GetWorkerCount();
     string GetType();
-    string GetWorkerList();
+    string GetWorkersString();
+    vector <Worker*> GetWorkerList();
     Worker* GetWorker(string id);
     void SetWorker(Worker* worker);
     void DeleteWorker(string id);

@@ -21,7 +21,7 @@ App::~App() {
 
 void App::Init() {
     srand(time(nullptr));
-    player = Player::Create("face");
+    player = Player::Create("novojogador");
     island = Island::Create(5, 5);
     //input.erase(input.begin(),input.end());
     //day = new int;
@@ -64,6 +64,7 @@ void App::GetInput() {
 }
 
 int App::CheckSyntax() {
+
     if (input.empty())
         return 0;
 
@@ -118,7 +119,14 @@ int App::CheckSyntax() {
         } else if (input.at(i) == "vende") {
             return 10;
 
-        } else if (input.at(i) == "save") {
+        } else if (input.at(i) == "novojogo") {
+            type = input.at(++i);
+            x = stoi(input.at(++i)) - 1;
+            y = stoi(input.at(++i)) - 1;
+            return 11;
+
+        }else if (input.at(i) == "load") {
+            type = input.at(++i);
             return 12;
 
         } else if (input.at(i) == "lvlup"){
@@ -131,18 +139,17 @@ int App::CheckSyntax() {
 }
 
 bool App::CheckCoords() {
-    //Todo: Redo deeez nuts
+    if (x > 0 && x <= island->GetCols() &&
+        y > 0 && y <= island->GetRows()   )
+        return true;
+
+    return false;
 }
 
 void App::Execute(int cmd_code) {
     switch (cmd_code) {
         case 1:
-            if (!ReadFromFile())
-                cout << "Houve um problema ao executar o ficheiro '" << type << "'.\n";
-            else
-                cout << "Ficheiro " << type << "executado com sucesso.\n";
-            system("pause");
-            system("cls");
+            ReadFromFile();
             break;
 
         case 2:
@@ -192,7 +199,7 @@ void App::Execute(int cmd_code) {
             break;
 
         case 8:
-            cout << "Comando nao implementado!\n";
+            SaveGame();
             break;
 
         case 9:
@@ -206,9 +213,20 @@ void App::Execute(int cmd_code) {
 
         case 10:
             cout << "Comando nao implementado!\n";
+            break;
+
+        case 11:
+            island = Island::Create(x, y);
+            player = Player::Create(type);
+            x = -1;
+            y = -1;
+            break;
 
         case 12:
-            cout << "Comando nao implementado!\n";
+            /* Todo: Implementar load
+             * LoadGame()
+             * type = "undef";
+             */
             break;
 
         case 13:
@@ -223,13 +241,15 @@ void App::Execute(int cmd_code) {
     }
 }
 
-bool App::ReadFromFile() {
+void App::ReadFromFile() {
     ifstream ifs;
     string command;
 
     ifs.open(type);
-    if (ifs == nullptr)
-        return false;
+    if (!ifs.is_open()) {
+        cout << "Erro ao abrir o ficheiro: " << type << ".\n";
+        return;
+    }
 
     while (!ifs.eof()) {
         getline(ifs, command);
@@ -240,8 +260,6 @@ bool App::ReadFromFile() {
         Execute(cmd_code);
         input.clear();
     }
-
-    return true;
 }
 
 bool App::CheckPurchase() {
@@ -530,4 +548,27 @@ void App::NewDay() {
         }
 
     cout << "It's a new daaaaaawwnnn, It's a new daaaaaay!\n";
+}
+
+void App::SaveGame() const {
+    fstream fs;
+    ostringstream filename;
+
+    filename << player->GetUsername() << ".txt";
+    fs.open(filename.str());
+
+    cout << filename.str();
+    system("pause");
+
+    if (!fs.is_open()) {
+        cout << "Erro ao criar ficheiro: " << filename.str() << ".\n";
+        return;
+    }
+
+    fs << island->GetIslandSaveData().data() << island->GetZonesSaveData();
+    fs.close();
+}
+
+void App::LoadGame() {
+
 }

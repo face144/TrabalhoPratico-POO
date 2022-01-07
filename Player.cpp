@@ -156,7 +156,7 @@ Player* Player::Create(string username) {
     auto player = new Player;
 
     //Assign variables
-    player->username = "face";
+    player->username = username;
 
     return player;
 }

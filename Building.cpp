@@ -49,6 +49,10 @@ void Building::SetOnline() {
     is_online = true;
 }
 
+void Building::SetLevel(int lvl) {
+    level = lvl;
+}
+
 int Building::GetLevel() {
     return level;
 }

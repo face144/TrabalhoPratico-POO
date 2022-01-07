@@ -9,36 +9,39 @@ Cell::~Cell() {
     delete building;
 }
 
-Cell* Cell::Create() {
+Cell* Cell::Create(const string& type) {
     Cell* zone = new Cell;
 
-    switch (rand() % 6 + 1) {
+    if (type == undef)
+        switch (rand() % 6 + 1) {
 
-        case 1:
-            zone->type = "mnt        ";
-            break;
+            case 1:
+                zone->type = "mnt        ";
+                break;
 
-        case 2:
-            zone->type = "dsr        ";
-            break;
+            case 2:
+                zone->type = "dsr        ";
+                break;
 
-        case 3:
-            zone->type = "pas        ";
-            break;
+            case 3:
+                zone->type = "pas        ";
+                break;
 
-        case 4:
-            zone->type = "flr        ";
-            break;
+            case 4:
+                zone->type = "flr        ";
+                break;
 
-        case 5:
-            zone->type = "pnt        ";
-            break;
+            case 5:
+                zone->type = "pnt        ";
+                break;
 
-        case 6:
-            zone->type = "rad        ";
-            break;
+            case 6:
+                zone->type = "rad        ";
+                break;
 
-    }
+        }
+    else zone->type = type;
+
     zone->building = Building::Create("undef");
     return zone;
 }
@@ -69,7 +72,7 @@ string Cell::GetWorkerCount() {
     return wrkr_cnt;
 }
 
-string Cell::GetWorkerList() {
+string Cell::GetWorkersString() {
     ostringstream oss;
     if (!worker_list.empty()) {
         for (auto &worker: worker_list)
@@ -81,6 +84,10 @@ string Cell::GetWorkerList() {
     else
         wrkr_cnt.resize(11, ' ');
     return wrkr_cnt;
+}
+
+vector <Worker*> Cell::GetWorkerList() {
+    return worker_list;
 }
 
 Worker* Cell::GetWorker(string id) {
