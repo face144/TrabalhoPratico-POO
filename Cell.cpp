@@ -16,27 +16,27 @@ Cell* Cell::Create(const string& type) {
         switch (rand() % 6 + 1) {
 
             case 1:
-                zone->type = "mnt        ";
+                zone->type = mnt;
                 break;
 
             case 2:
-                zone->type = "dsr        ";
+                zone->type = dsr;
                 break;
 
             case 3:
-                zone->type = "pas        ";
+                zone->type = pas;
                 break;
 
             case 4:
-                zone->type = "flr        ";
+                zone->type = flr;
                 break;
 
             case 5:
-                zone->type = "pnt        ";
+                zone->type = pnt;
                 break;
 
             case 6:
-                zone->type = "rad        ";
+                zone->type = rad;
                 break;
 
         }
@@ -55,6 +55,10 @@ void Cell::DestroyProbHandler(int* day) {
         delete building;
         building = Building::Create("undef");
     }
+}
+
+void Cell::SetType(string type) {
+    this->type = type;
 }
 
 string Cell::GetType() {
@@ -120,4 +124,9 @@ void Cell::SetBuilding(const string& building_type) {
 
 Building* Cell::GetBuilding() {
     return building;
+}
+
+void Cell::KillWorkers() {
+    worker_list.erase(worker_list.begin(), worker_list.end());
+    //worker_list.clear();
 }

@@ -20,9 +20,23 @@ App::~App() {
 }
 
 void App::Init() {
+    system("cls");
+    cout << "Nome do jogador: ";
+    string username;
+    cin >> username;
+
+    system("cls");
+    cout << "Mapa\n\n";
+    cout << "Numero de filas: ";
+    int rows; cin >> rows;
+    cout << "Numero de colunas: ";
+    int cols; cin >> cols;
+    system("cls");
+    cout << "Escreva 'ajuda' para a lista de comandos. Bom jogo!\n";
+
     srand(time(nullptr));
-    player = Player::Create("novojogador");
-    island = Island::Create(5, 5);
+    player = Player::Create(username);
+    island = Island::Create(cols, rows);
     //input.erase(input.begin(),input.end());
     //day = new int;
     *day = 1;
@@ -39,10 +53,10 @@ void App::PrintHUD() {
 
     oss << "Dia " << *day << " | Jogador: " << player->GetUsername() << endl << endl;
 
-    oss << "Guitos: " << player->GetMoney() << "$" << endl;
-    oss << "Madeira      - " << player->GetWood()        << " | Vigas de Madeira       - " << player->GetWoodBeam() << endl;
-    oss << "Ferro        - " << player->GetIron()        << " | Vigas de Aco           - " << player->GetSteel()    << endl;
-    oss << "Eletricidade - " << player->GetElectricity() << " | Carvaummmmm            - " << player->GetCoal()     << endl;
+    oss << "Dinheiro: " << player->GetMoney() << "$" << endl;
+    oss << "Madeira      - " << player->GetWood()        << " | Vigas de Madeira - " << player->GetWoodBeam() << endl;
+    oss << "Ferro        - " << player->GetIron()        << " | Vigas de Aco     - " << player->GetSteel()    << endl;
+    oss << "Eletricidade - " << player->GetElectricity() << " | Carvao           - " << player->GetCoal()     << endl;
 
     cout << oss.str();
 }
@@ -51,7 +65,9 @@ void App::GetInput() {
     int cmd_code;
     string user_input;
     cout << player->GetUsername() << ':';
+    cin >> ws;
     getline(cin, user_input);
+
 
     istringstream iss( user_input );
     for ( string keyword ; iss >> keyword ; )
@@ -126,7 +142,6 @@ int App::CheckSyntax() {
             return 11;
 
         }else if (input.at(i) == "load") {
-            type = input.at(++i);
             return 12;
 
         } else if (input.at(i) == "lvlup"){
@@ -147,6 +162,7 @@ bool App::CheckCoords() {
 }
 
 void App::Execute(int cmd_code) {
+    string username;
     switch (cmd_code) {
         case 1:
             ReadFromFile();
@@ -157,9 +173,6 @@ void App::Execute(int cmd_code) {
                 island->GetZone(x, y)->SetBuilding(type);
             else
                 cout << "Erro na construcao do edificio!\n";
-            type = "undef";
-            x = -1;
-            y = -1;
             break;
 
         case 3:
@@ -167,8 +180,6 @@ void App::Execute(int cmd_code) {
                 cout << "Nenhum edifico nessa zona!\n";
             else
                 island->GetZone(x, y)->GetBuilding()->SetOnline();
-            x = -1;
-            y = -1;
             break;
 
         case 4:
@@ -207,8 +218,6 @@ void App::Execute(int cmd_code) {
                 cout << "Nenhum edifico nessa zona!\n";
             else
                 island->GetZone(x, y)->GetBuilding()->SetOffline();
-            x = -1;
-            y = -1;
             break;
 
         case 10:
@@ -218,41 +227,39 @@ void App::Execute(int cmd_code) {
         case 11:
             island = Island::Create(x, y);
             player = Player::Create(type);
-            x = -1;
-            y = -1;
             break;
 
         case 12:
-            /* Todo: Implementar load
-             * LoadGame()
-             * type = "undef";
-             */
+            cout << "Nome de utilizador: ";
+            cin >> username;
+            LoadGame(username);
             break;
 
         case 13:
             LevelUp();
-            x = -1;
-            y = -1;
             break;
 
         default:
             cout << "Comando invalido!\n";
             break;
     }
+    type = "undef";
+    x = -1;
+    y = -1;
 }
 
 void App::ReadFromFile() {
-    ifstream ifs;
+    fstream fs;
     string command;
 
-    ifs.open(type);
-    if (!ifs.is_open()) {
+    fs.open(type, ios::in);
+    if (!fs.is_open()) {
         cout << "Erro ao abrir o ficheiro: " << type << ".\n";
         return;
     }
 
-    while (!ifs.eof()) {
-        getline(ifs, command);
+    while (!fs.eof()) {
+        getline(fs, command);
         istringstream iss(command);
         for ( string keyword ; iss >> keyword ; )
             this->input.emplace_back(keyword);
@@ -344,6 +351,12 @@ bool App::LevelUp() {  //Trocar valores
 
     } else if(island->GetZone(x, y)->GetBuildingType() == bat) {
         if (island->GetZone(x, y)->GetBuilding()->LevelUp() && player->TakeMoney(5))
+            cout << "Edifico melhorado para o nivel " << island->GetZone(x, y)->GetBuilding()->GetLevel() << ".\n";
+        else
+            cout << "Recursos insuficientes!\n";
+
+    } else if (island->GetZone(x, y)->GetBuildingType() == rad) {
+        if (island->GetZone(x, y)->GetBuilding()->LevelUp() && player->TakeMoney(10))
             cout << "Edifico melhorado para o nivel " << island->GetZone(x, y)->GetBuilding()->GetLevel() << ".\n";
         else
             cout << "Recursos insuficientes!\n";
@@ -544,8 +557,14 @@ void App::NewDay() {
         for (int j = 0; j < island->GetCols(); j++) {
             GiveResources(i, j);
             island->GetZone(i, j)->DestroyProbHandler(day);
-            island->GetZone(i, j)->GetBuilding()->NextDay();
+            //island->GetZone(i, j)->GetBuilding()->NextDay();
+            if (island->GetZone(i, j)->GetType() == rad)
+                island->GetZone(i, j)->KillWorkers();
         }
+
+
+    if (*day % 10 == 0)
+        island->RadiationUpdate(*day);
 
     cout << "It's a new daaaaaawwnnn, It's a new daaaaaay!\n";
 }
@@ -555,10 +574,7 @@ void App::SaveGame() const {
     ostringstream filename;
 
     filename << player->GetUsername() << ".txt";
-    fs.open(filename.str());
-
-    cout << filename.str();
-    system("pause");
+    fs.open(filename.str(), ios::out);
 
     if (!fs.is_open()) {
         cout << "Erro ao criar ficheiro: " << filename.str() << ".\n";
@@ -567,8 +583,12 @@ void App::SaveGame() const {
 
     fs << island->GetIslandSaveData().data() << island->GetZonesSaveData();
     fs.close();
+
+    cout << "Ficheiro guardado como '" << filename.str() << "'.\n";
 }
 
-void App::LoadGame() {
-
+void App::LoadGame(string &username) {
+    ostringstream filename;
+    filename << username << ".txt";
+    island->LoadData(filename.str());
 }

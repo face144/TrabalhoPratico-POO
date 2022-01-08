@@ -7,6 +7,7 @@
 #include <fstream>
 #include <string>
 #include "Cell.h"
+#include "Codes.h"
 
 using namespace std;
 
@@ -25,7 +26,8 @@ public:
     int GetRows() const;
     string GetZonesSaveData() const;
     string GetIslandSaveData() const;
-    void LoadData(string filename);
+    void LoadData(const string& filename);
+    void RadiationUpdate(int& day);
 
     bool MoveWorker(string id, int* x, int* y);
 

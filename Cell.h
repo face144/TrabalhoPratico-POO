@@ -31,6 +31,7 @@ public:
     static Cell* Create(const string& type = undef);
     void DestroyProbHandler(int* day);
     string GetWorkerCount();
+    void SetType(string type);
     string GetType();
     string GetWorkersString();
     vector <Worker*> GetWorkerList();
@@ -39,8 +40,9 @@ public:
     void DeleteWorker(string id);
     string GetBuildingType();
 
-    void SetBuilding(const string& type);
+    void SetBuilding(const string& type = "undef");
     Building* GetBuilding();
+    void KillWorkers();
 };
 
 

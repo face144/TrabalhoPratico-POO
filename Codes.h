@@ -14,12 +14,14 @@
 #define central "central      "
 #define bat "bat          "
 #define fund "fund         "
+#define filt "filt         "
 
 #define mnt "mnt        "
 #define flr "flr        "
 #define pnt "pnt        "
 #define dsr "dsr        "
 #define pas "pas        "
+#define rad "rad        "
 
 
 #endif //TP_POO_RELOADED_CODES_H

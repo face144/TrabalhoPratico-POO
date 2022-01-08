@@ -25,7 +25,7 @@ int Building::GetDay() {
 }
 
 bool Building::LevelUp() {
-    if(level >= 5)
+    if(level >= max_level)
         return false;
 
     level++;
@@ -81,15 +81,17 @@ Building* Building::Create(const string& type) {
         building = new Bat;
     } else if (type == "fund") {
         building = new Fund;
-    } else if (type == "edx") {
+    } else if (type == "filt") {
         building = new Edx;
+    } else if (type == undef) {
+        building = new Building;
     } else building = new Building;
     return building;
 }
 
 Minaf::Minaf() {
 
-    type = "minaf        ";
+    type = minaf;
     level = 1;
     max_level = 5;
     destroy_prob = 0.15;
@@ -103,7 +105,7 @@ Minaf::Minaf() {
 
 
 Minac::Minac() {
-    type = "minac        ";
+    type = minac;
     level = 1;
     max_level = 5;
     destroy_prob = 0.1;
@@ -112,7 +114,7 @@ Minac::Minac() {
 }
 
 Central::Central() {
-    type = "central      ";
+    type = central;
     level = 1;
     max_level = 1;
     destroy_prob = 0;
@@ -121,7 +123,7 @@ Central::Central() {
 }
 
 Bat::Bat() {
-    type = "bat          ";
+    type = bat;
     level = 1;
     max_level = 5;
     destroy_prob = 0;
@@ -129,7 +131,7 @@ Bat::Bat() {
 }
 
 Fund::Fund() {
-    type = "fund         ";
+    type = fund;
     level = 1;
     max_level = 1;
     destroy_prob = 0;
@@ -137,9 +139,9 @@ Fund::Fund() {
 }
 
 Edx::Edx() {
-    type = "edx          ";
+    type = filt;
     level = 1;
-    max_level = 1;
+    max_level = 2;
     destroy_prob = 0;
     is_online = false;
 }

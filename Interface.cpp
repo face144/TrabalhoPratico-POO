@@ -44,6 +44,7 @@ void Interface::Start() {
     ShowWindow(GetConsoleWindow(), SW_MAXIMIZE); //Todo: Also apagar dps...
     //SplashScreen();
     game->Init();
+
 }
 
 void Interface::Loop() {

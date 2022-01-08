@@ -29,7 +29,7 @@ private:
     void NewDay();
     void ReadFromFile();
     void SaveGame() const;
-    void LoadGame();
+    void LoadGame(string &username);
 
 public:
     App();
