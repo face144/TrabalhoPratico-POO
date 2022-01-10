@@ -23,5 +23,8 @@
 #define pas "pas        "
 #define rad "rad        "
 
+#define oper "O"
+#define mine "M"
+#define lenh "L"
 
 #endif //TP_POO_RELOADED_CODES_H

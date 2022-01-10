@@ -18,7 +18,7 @@ protected:
     int cap;
     int max_cap;
     int output;
-    int day;
+    int days;
 
 public:
     Building();

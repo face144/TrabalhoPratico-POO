@@ -30,6 +30,7 @@ public:
 
     static Cell* Create(const string& type = undef);
     void DestroyProbHandler(int* day);
+    void QuitProbHandler(int &day);
     string GetWorkerCount();
     void SetType(string type);
     string GetType();

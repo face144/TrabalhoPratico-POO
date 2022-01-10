@@ -239,6 +239,10 @@ bool Island::MoveWorker(string id, int* x, int* y) {
     return false;
 }
 
+void Island::SpawnWorker(Worker* worker) {
+    zone.at(1)->GetWorkerList().emplace_back(worker);
+}
+
 Cell* Island::GetZone(const int x, const int y) {
     return zone.at(x * rows + y);
 }

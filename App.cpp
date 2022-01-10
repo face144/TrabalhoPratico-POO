@@ -183,20 +183,15 @@ void App::Execute(int cmd_code) {
             break;
 
         case 4:
-            cout << "Comando nao implementado!\n";
+            island->MoveWorker(type, &x, &y);
             break;
 
         case 5:
             //Todo: Criar funcao para ver os guitos e por o que esta aqui nessa funcao;
-            /*Worker::Create(type, day, worker_cnt);
-            int *_x, *_y;
-            *_x = 1;
-            *_y = 1;
-            island->MoveWorker("1.1", _x, _y);
-
+            island->SpawnWorker(Worker::Create(type, day, worker_cnt));
             worker_cnt++;
-            type = "undef";*/
-            cout << "Comando nao implementado!\n";
+            type = "undef";
+            //cout << "Comando nao implementado!\n";
             break;
 
         case 6:
@@ -557,7 +552,8 @@ void App::NewDay() {
         for (int j = 0; j < island->GetCols(); j++) {
             GiveResources(i, j);
             island->GetZone(i, j)->DestroyProbHandler(day);
-            //island->GetZone(i, j)->GetBuilding()->NextDay();
+            island->GetZone(i, j)->QuitProbHandler(*day);
+            island->GetZone(i, j)->GetBuilding()->NextDay();
             if (island->GetZone(i, j)->GetType() == rad)
                 island->GetZone(i, j)->KillWorkers();
         }

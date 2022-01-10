@@ -57,6 +57,15 @@ void Cell::DestroyProbHandler(int* day) {
     }
 }
 
+void Cell::QuitProbHandler(int &day) {
+    for (int i = 0; i < worker_list.size(); i++) {
+        worker_list.at(i)->UpdateQuitProb(day);
+        if (rand() % 100 < worker_list.at(i)->GetQuitProb() * 100) {
+            worker_list.erase(worker_list.begin() + i);
+        }
+    }
+}
+
 void Cell::SetType(string type) {
     this->type = type;
 }

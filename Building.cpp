@@ -11,17 +11,17 @@ Building::Building() {
     cap = 0;
     max_cap = 0;
     output = 0;
-    day = 1;
+    days = 0;
 }
 
 Building::~Building() { }
 
 void Building::NextDay() {
-    day++;
+    days++;
 }
 
 int Building::GetDay() {
-    return day;
+    return days;
 }
 
 bool Building::LevelUp() {

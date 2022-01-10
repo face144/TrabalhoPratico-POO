@@ -30,6 +30,7 @@ public:
     void RadiationUpdate(int& day);
 
     bool MoveWorker(string id, int* x, int* y);
+    void SpawnWorker(Worker* worker);
 
     Cell* GetZone(int x, int y);
     void SetBuilding(int x, int y, const string& type);
