@@ -228,19 +228,18 @@ void Island::RadiationUpdate(int& day) {
 }
 
 bool Island::MoveWorker(string id, int* x, int* y) {
-    for (auto &temp_zone : zone) { //Todo: Fix sigsegv here!
-        if (temp_zone->GetWorker(id) != nullptr) {
-            Worker *temp_worker = temp_zone->GetWorker(id);
-            GetZone(*x, *y)->SetWorker(temp_worker);
-            temp_zone->DeleteWorker(id);
-            return true;
-        }
-    }
-    return false;
+
 }
 
 void Island::SpawnWorker(Worker* worker) {
     zone.at(1)->GetWorkerList().emplace_back(worker);
+    for (auto &worker : zone.at(1)->GetWorkerList()) {
+        if (worker != nullptr)
+            cout << worker->GetID() << endl;
+
+        else cout << "Worker is nullptr" << endl;
+
+    }
 }
 
 Cell* Island::GetZone(const int x, const int y) {

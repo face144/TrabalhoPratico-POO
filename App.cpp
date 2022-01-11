@@ -115,8 +115,12 @@ int App::CheckSyntax() {
             return 4;
 
         } else if (input.at(i) == "cont") {
-            type = input.at(++i);
-            return 5;
+            if (input.at(++i) == "operario" ||
+                input.at(i) == "mineiro" ||
+                input.at(i) == "lenhador") {
+                type = input.at(i);
+                return 5;
+            }
 
         } else if (input.at(i) == "list") {
             return 6;
@@ -188,9 +192,8 @@ void App::Execute(int cmd_code) {
 
         case 5:
             //Todo: Criar funcao para ver os guitos e por o que esta aqui nessa funcao;
-            island->SpawnWorker(Worker::Create(type, day, worker_cnt));
+            island->GetZone(1, 1)->SetWorker(type, *day, *worker_cnt);
             worker_cnt++;
-            type = "undef";
             //cout << "Comando nao implementado!\n";
             break;
 

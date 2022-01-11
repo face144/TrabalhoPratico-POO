@@ -26,25 +26,22 @@ public:
     string GetID();
     static Worker* Create(const string& type, int* days, int* worker_nr);
     void UpdateQuitProb(int &days);
-    float GetQuitProb();
+    float GetQuitProb() const;
 
 };
 
 class Operario : public Worker {
 public:
     Operario();
-    ~Operario();
 };
 
 class Lenhador : public Worker {
 public:
     Lenhador();
-    ~Lenhador();
 };
 
 class Mineiro : public Worker{
 public:
     Mineiro();
-    ~Mineiro();
 };
 #endif //TP_POO_RELOADED_WORKER_H

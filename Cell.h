@@ -37,7 +37,7 @@ public:
     string GetWorkersString();
     vector <Worker*> GetWorkerList();
     Worker* GetWorker(string id);
-    void SetWorker(Worker* worker);
+    void SetWorker(string type, int &day, int &worker_nr);
     void DeleteWorker(string id);
     string GetBuildingType();
 

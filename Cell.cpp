@@ -76,27 +76,28 @@ string Cell::GetType() {
 
 string Cell::GetWorkerCount() {
     ostringstream oss;
-    oss << worker_list.size() << ' ';
-    string wrkr_cnt = oss.str();
-    if (wrkr_cnt.size() > 11)
-        wrkr_cnt.resize(11);
-    else
-        wrkr_cnt.resize(11, ' ');
-    return wrkr_cnt;
+    oss << worker_list.size();
+
+    if (worker_list.size() > 11)
+        oss.str().resize(11);
+    else if (worker_list.size() < 11)
+        oss.str().resize(11, '.');
+
+    oss.str().resize(11, '.');
+    return oss.str();
 }
 
 string Cell::GetWorkersString() {
     ostringstream oss;
-    if (!worker_list.empty()) {
-        for (auto &worker: worker_list)
-            oss << worker->GetType() << ' ';
-    }
-    string wrkr_cnt = oss.str();
-    if (wrkr_cnt.size() > 11)
-        wrkr_cnt.resize(11);
-    else
-        wrkr_cnt.resize(11, ' ');
-    return wrkr_cnt;
+    for (auto & i : worker_list)
+        oss << i->GetType() << ' ';
+
+    if (worker_list.size() > 11)
+        oss.str().resize(11);
+    else if (worker_list.size() < 11)
+        oss.str().resize(11, ' ');
+
+    return oss.str();
 }
 
 vector <Worker*> Cell::GetWorkerList() {
@@ -112,8 +113,8 @@ Worker* Cell::GetWorker(string id) {
     return nullptr;
 }
 
-void Cell::SetWorker(Worker* worker) {
-    worker_list.emplace_back(worker);
+void Cell::SetWorker(string type, int &day, int &worker_nr) {
+    worker_list.emplace_back(Worker::Create(type, &day, &worker_nr));
 }
 
 void Cell::DeleteWorker(string id) {

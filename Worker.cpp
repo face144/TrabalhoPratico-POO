@@ -29,18 +29,20 @@ string Worker::GetID() {
 
 Worker* Worker::Create(const string& type, int* day, int* worker_nr) {
     Worker* worker;
+
     if (type == "operario") {
-        worker = new Operario;
+        worker = new Operario();
         worker->AssignID(day, worker_nr);
-    }else if (type == "lenhador") {
-        worker = new Lenhador;
+    } else if (type == "lenhador") {
+        worker = new Lenhador();
         worker->AssignID(day, worker_nr);
-    }else if(type == "mineiro"){
+    } else if (type == "mineiro") {
         worker = new Mineiro;
         worker->AssignID(day, worker_nr);
-    }else {
+    } else {
         return nullptr;
     }
+
     return worker;
 }
 
@@ -54,7 +56,7 @@ void Worker::UpdateQuitProb(int &day){
     }
 }
 
-float Worker::GetQuitProb() {
+float Worker::GetQuitProb() const {
     return quitProb;
 }
 
