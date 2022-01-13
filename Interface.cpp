@@ -36,7 +36,6 @@ void Interface::SplashScreen() { //Todo: Apagar dps...
 
     cout << "                                        A carregar simulacao...                                             \n";
     cout << "                                        Por favor aguarde.                                                  \n";
-    sleep_for(seconds(4));
     system("cls");
 }
 

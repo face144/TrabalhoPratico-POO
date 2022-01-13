@@ -9,25 +9,20 @@ using namespace std;
 
 class Player {
     string username;
-    Storage* money;
-    Storage* iron;
-    Storage* steel;
-    Storage* coal;
-    Storage* wood;
-    Storage* wood_beam;
-    Storage* electricity;
+    Storage* storage;
+    int money;
 
 public:
     Player();
     ~Player();
 
-    int GetMoney();
-    int GetIron();
-    int GetSteel();
-    int GetCoal();
-    int GetWood();
-    int GetWoodBeam();
-    int GetElectricity();
+    int* GetMoney();
+    int* GetIron();
+    int* GetSteel();
+    int* GetCoal();
+    int* GetWood();
+    int* GetWoodBeam();
+    int* GetElectricity();
 
     bool TakeMoney(int money);
     bool TakeIron(int iron);

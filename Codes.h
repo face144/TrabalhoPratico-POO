@@ -15,6 +15,7 @@
 #define bat "bat          "
 #define fund "fund         "
 #define filt "filt         "
+#define serr "serr         "
 
 #define mnt "mnt        "
 #define flr "flr        "

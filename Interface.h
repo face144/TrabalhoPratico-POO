@@ -6,7 +6,6 @@
 #include <chrono>
 #include <windows.h>
 
-using namespace std::this_thread;
 using namespace std::chrono;
 
 class Interface {

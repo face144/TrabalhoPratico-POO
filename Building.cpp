@@ -8,8 +8,6 @@ Building::Building() {
     destroy_prob = 0;
     is_online = true;
     needs_worker = true;
-    cap = 0;
-    max_cap = 0;
     output = 0;
     days = 0;
 }
@@ -85,6 +83,8 @@ Building* Building::Create(const string& type) {
         building = new Edx;
     } else if (type == undef) {
         building = new Building;
+    }else if (type == "serr") {
+        building = new Serr;
     } else building = new Building;
     return building;
 }
@@ -97,10 +97,7 @@ Minaf::Minaf() {
     destroy_prob = 0.15;
     is_online = false;
     needs_worker = true;
-    cap = 0;
-    max_cap = 0;
     output = 2;
-
 }
 
 
@@ -109,7 +106,8 @@ Minac::Minac() {
     level = 1;
     max_level = 5;
     destroy_prob = 0.1;
-    is_online = false;
+    is_online = true;
+    needs_worker = true;
     output = 2;
 }
 
@@ -118,7 +116,8 @@ Central::Central() {
     level = 1;
     max_level = 1;
     destroy_prob = 0;
-    is_online = false;
+    is_online = true;
+    needs_worker = true;
     output = 1;
 }
 
@@ -132,6 +131,14 @@ Bat::Bat() {
 
 Fund::Fund() {
     type = fund;
+    level = 1;
+    max_level = 1;
+    destroy_prob = 0;
+    is_online = false;
+}
+
+Serr::Serr() {
+    type = serr;
     level = 1;
     max_level = 1;
     destroy_prob = 0;

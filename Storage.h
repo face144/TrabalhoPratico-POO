@@ -1,23 +1,27 @@
 #ifndef TRABALHOPRATICO_POO_RELOADED_STORAGE_H
 #define TRABALHOPRATICO_POO_RELOADED_STORAGE_H
+
 #include <iostream>
+#include <vector>
+#include "Resources.h"
 
 using namespace std;
 
 class Storage {
 private:
-    int cap;
-    int max_cap;
+    vector <Resource*> storage;
 
 public:
     Storage();
     ~Storage();
 
-    int GetCap();
-    int GetMaxCap();
+    static Storage* Create();
 
-    void SetCap(int cap);
-    void SetMaxCap(int max_cap);
+    int* GetCap(string type);
+    int* GetMaxCap(string type);
+
+    void SetCap(string type, int cap);
+    void SetMaxCap(string type, int max_cap);
 
 
 };

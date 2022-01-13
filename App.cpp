@@ -89,20 +89,26 @@ int App::CheckSyntax() {
     for (int i = 0; i < input.size(); ++i) {
 
         if (input.at(i) == "exec") {
+
             type = input.at(++i);
+
             return 1;
 
         } else if (input.at(i) == "cons") {
-            i++;
-            if (input.at(i) == "minaf" ||
+
+            if (input.at(++i) == "minaf" ||
                 input.at(i) == "minac" ||
                 input.at(i) == "central" ||
                 input.at(i) == "bat" ||
                 input.at(i) == "fund" ||
-                input.at(i) == "filt") {
+                input.at(i) == "filt" ||
+                input.at(i) == "serr") {
+
                 type = input.at(i);
+
                 x = stoi(input.at(++i)) - 1;
                 y = stoi(input.at(++i)) - 1;
+
                 return 2;
             }
 
@@ -115,42 +121,55 @@ int App::CheckSyntax() {
             return 4;
 
         } else if (input.at(i) == "cont") {
+
             if (input.at(++i) == "operario" ||
                 input.at(i) == "mineiro" ||
                 input.at(i) == "lenhador") {
+
                 type = input.at(i);
                 return 5;
             }
 
         } else if (input.at(i) == "list") {
+
             return 6;
 
         } else if (input.at(i) == "next") {
+
             return 7;
 
         } else if (input.at(i) == "save") {
+
             return 8;
 
         } else if (input.at(i) == "des") {
+
             x = stoi(input.at(++i)) - 1;
             y = stoi(input.at(++i)) - 1;
+
             return 9;
 
         } else if (input.at(i) == "vende") {
+
             return 10;
 
         } else if (input.at(i) == "novojogo") {
+
             type = input.at(++i);
             x = stoi(input.at(++i)) - 1;
             y = stoi(input.at(++i)) - 1;
+
             return 11;
 
         }else if (input.at(i) == "load") {
+
             return 12;
 
         } else if (input.at(i) == "lvlup"){
+
             x = stoi(input.at(++i)) - 1;
             y = stoi(input.at(++i)) - 1;
+
             return 13;
 
         } else { return 0; } }
@@ -158,6 +177,7 @@ int App::CheckSyntax() {
 }
 
 bool App::CheckCoords() {
+    // Todo: Acabar isto
     if (x > 0 && x <= island->GetCols() &&
         y > 0 && y <= island->GetRows()   )
         return true;
@@ -331,6 +351,13 @@ bool App::CheckPurchase() {
         else
             return player->TakeMoney(filt_cost);
     }
+
+    if (type == "serr"){
+        if (island->GetZone(x, y)->GetType() == mnt)
+            return player->TakeMoney(filt_cost * 2);
+        else
+            return player->TakeMoney(filt_cost);
+    }
     return false;
 }
 
@@ -381,41 +408,7 @@ void App::GiveResources(int x, int y) {
             //if (island->GetZone(x,y)->GetWorker(type) != nullptr)
             player->GiveCoal(island->GetZone(x, y)->GetBuilding()->GetOutput() / 2);
 
-        } else if (island->GetZone(x, y)->GetBuildingType() == fund) {
-            bool give_output_minaf = false;
-            bool give_output_minacC = false;
-            if (x - 1 >= 0) {
-                if (island->GetZone(x - 1, y)->GetBuildingType() == minaf)
-                    give_output_minaf = true;
-                else if (island->GetZone(x - 1, y)->GetBuildingType() == minac ||
-                         island->GetZone(x - 1, y)->GetBuildingType() == central)
-                    give_output_minacC = true;
-            }
-            if (x + 1 <= island->GetCols()) {
-                if (island->GetZone(x + 1, y)->GetBuildingType() == minaf)
-                    give_output_minaf = true;
-                else if (island->GetZone(x + 1, y)->GetBuildingType() == minac ||
-                         island->GetZone(x + 1, y)->GetBuildingType() == central)
-                    give_output_minacC = true;
-            }
-            if (y - 1 >= 0) {
-                if (island->GetZone(x, y - 1)->GetBuildingType() == minaf)
-                    give_output_minaf = true;
-                else if (island->GetZone(x, y - 1)->GetBuildingType() == minac ||
-                         island->GetZone(x, y - 1)->GetBuildingType() == central)
-                    give_output_minacC = true;
-            }
-            if (y + 1 <= island->GetRows()) {
-                if (island->GetZone(x, y + 1)->GetBuildingType() == minaf)
-                    give_output_minaf = true;
-                else if (island->GetZone(x, y + 1)->GetBuildingType() == minac ||
-                         island->GetZone(x, y + 1)->GetBuildingType() == central)
-                    give_output_minacC = true;
-            }
-            if (give_output_minaf && give_output_minacC)
-                player->GiveSteel(island->GetZone(x, y)->GetBuilding()->GetOutput() * 2);
         }
-
 
     } else if (island->GetZone(x, y)->GetType() == mnt) {
             if (island->GetZone(x, y)->GetBuildingType() == minaf) {
@@ -424,129 +417,111 @@ void App::GiveResources(int x, int y) {
             } else if (island->GetZone(x, y)->GetBuildingType() == minac) {
                 player->GiveCoal(island->GetZone(x, y)->GetBuilding()->GetOutput() * 2);
 
-            } else if (island->GetZone(x, y)->GetBuildingType() == central) {
-                bool give_output = false;
+            }
 
-                if (x - 1 >= 0) {
-                    if (island->GetZone(x - 1, y)->GetBuildingType() == bat)
-                        give_output = true;
-                }
-                if (x + 1 <= island->GetCols()) {
-                    if (island->GetZone(x + 1, y)->GetBuildingType() == bat)
-                        give_output = true;
-                }
-                if (y - 1 >= 0) {
-                    if (island->GetZone(x, y - 1)->GetBuildingType() == bat)
-                        give_output = true;
-                }
-                if (y + 1 <= island->GetRows()) {
-                    if (island->GetZone(x, y + 1)->GetBuildingType() == bat)
-                        give_output = true;
-                }
-                if (give_output)
-                    player->GiveElectricity(island->GetZone(x, y)->GetBuilding()->GetOutput() / 2);
+    } else {
 
-            } else if (island->GetZone(x, y)->GetBuildingType() == fund) {
+        if (island->GetZone(x, y)->GetBuildingType() == minaf) {
+            player->GiveIron(island->GetZone(x, y)->GetBuilding()->GetOutput());
+
+        } else if (island->GetZone(x, y)->GetBuildingType() == minac) {
+            player->GiveCoal(island->GetZone(x, y)->GetBuilding()->GetOutput());
+
+        } else if (island->GetZone(x, y)->GetBuildingType() == central) {
+            bool give_output = false;
+
+            if (x - 1 >= 0) {
+                if (island->GetZone(x - 1, y)->GetBuildingType() == bat)
+                    give_output = true;
+            }
+            if (x + 1 <= island->GetCols()) {
+                if (island->GetZone(x + 1, y)->GetBuildingType() == bat)
+                    give_output = true;
+            }
+            if (y - 1 >= 0) {
+                if (island->GetZone(x, y - 1)->GetBuildingType() == bat)
+                    give_output = true;
+            }
+            if (y + 1 <= island->GetRows()) {
+                if (island->GetZone(x, y + 1)->GetBuildingType() == bat)
+                    give_output = true;
+            }
+            if (give_output)
+                player->GiveElectricity(island->GetZone(x, y)->GetBuilding()->GetOutput());
+
+        } else if (island->GetZone(x, y)->GetBuildingType() == central) {
+            bool give_output = false;
+
+            if (x - 1 >= 0) {
+                if (island->GetZone(x - 1, y)->GetBuildingType() == bat)
+                    give_output = true;
+            }
+            if (x + 1 <= island->GetCols()) {
+                if (island->GetZone(x + 1, y)->GetBuildingType() == bat)
+                    give_output = true;
+            }
+            if (y - 1 >= 0) {
+                if (island->GetZone(x, y - 1)->GetBuildingType() == bat)
+                    give_output = true;
+            }
+            if (y + 1 <= island->GetRows()) {
+                if (island->GetZone(x, y + 1)->GetBuildingType() == bat)
+                    give_output = true;
+            }
+            if (give_output)
+                player->GiveElectricity(island->GetZone(x, y)->GetBuilding()->GetOutput());
+
+        } else if (island->GetZone(x, y)->GetBuildingType() == fund) {
                 bool give_output_minaf = false;
                 bool give_output_minacC = false;
+
                 if (x - 1 >= 0) {
                     if (island->GetZone(x - 1, y)->GetBuildingType() == minaf)
                         give_output_minaf = true;
+
                     else if (island->GetZone(x - 1, y)->GetBuildingType() == minac ||
                              island->GetZone(x - 1, y)->GetBuildingType() == central)
                         give_output_minacC = true;
                 }
+
                 if (x + 1 <= island->GetCols()) {
                     if (island->GetZone(x + 1, y)->GetBuildingType() == minaf)
                         give_output_minaf = true;
+
                     else if (island->GetZone(x + 1, y)->GetBuildingType() == minac ||
                              island->GetZone(x + 1, y)->GetBuildingType() == central)
                         give_output_minacC = true;
                 }
+
                 if (y - 1 >= 0) {
                     if (island->GetZone(x, y - 1)->GetBuildingType() == minaf)
                         give_output_minaf = true;
+
                     else if (island->GetZone(x, y - 1)->GetBuildingType() == minac ||
                              island->GetZone(x, y - 1)->GetBuildingType() == central)
                         give_output_minacC = true;
                 }
+
                 if (y + 1 <= island->GetRows()) {
                     if (island->GetZone(x, y + 1)->GetBuildingType() == minaf)
                         give_output_minaf = true;
+
                     else if (island->GetZone(x, y + 1)->GetBuildingType() == minac ||
                              island->GetZone(x, y + 1)->GetBuildingType() == central)
                         give_output_minacC = true;
                 }
+
                 if (give_output_minaf && give_output_minacC)
                     player->GiveSteel(island->GetZone(x, y)->GetBuilding()->GetOutput() * 2);
 
-            } else {
+        }else if (island->GetZone(x, y)->GetBuildingType() == serr){
+            player->GiveWoodBeam(island->GetZone(x, y)->GetBuilding()->GetOutput());
+        }
 
-                if (island->GetZone(x, y)->GetBuildingType() == minaf) {
-                    player->GiveIron(island->GetZone(x, y)->GetBuilding()->GetOutput());
+        }
 
-                } else if (island->GetZone(x, y)->GetBuildingType() == minac) {
-                    player->GiveCoal(island->GetZone(x, y)->GetBuilding()->GetOutput());
+    }
 
-                } else if (island->GetZone(x, y)->GetBuildingType() == central) {
-                    bool give_output = false;
-
-                    if (x - 1 >= 0) {
-                        if (island->GetZone(x - 1, y)->GetBuildingType() == bat)
-                            give_output = true;
-                    }
-                    if (x + 1 <= island->GetCols()) {
-                        if (island->GetZone(x + 1, y)->GetBuildingType() == bat)
-                            give_output = true;
-                    }
-                    if (y - 1 >= 0) {
-                        if (island->GetZone(x, y - 1)->GetBuildingType() == bat)
-                            give_output = true;
-                    }
-                    if (y + 1 <= island->GetRows()) {
-                        if (island->GetZone(x, y + 1)->GetBuildingType() == bat)
-                            give_output = true;
-                    }
-                    if (give_output)
-                        player->GiveElectricity(island->GetZone(x, y)->GetBuilding()->GetOutput());
-
-                } else if (island->GetZone(x, y)->GetBuildingType() == fund) {
-                    bool give_output_minaf = false;
-                    bool give_output_minacC = false;
-                    if (x - 1 >= 0) {
-                        if (island->GetZone(x - 1, y)->GetBuildingType() == minaf)
-                            give_output_minaf = true;
-                        else if (island->GetZone(x - 1, y)->GetBuildingType() == minac ||
-                                 island->GetZone(x - 1, y)->GetBuildingType() == central)
-                            give_output_minacC = true;
-                    }
-                    if (x + 1 <= island->GetCols()) {
-                        if (island->GetZone(x + 1, y)->GetBuildingType() == minaf)
-                            give_output_minaf = true;
-                        else if (island->GetZone(x + 1, y)->GetBuildingType() == minac ||
-                                 island->GetZone(x + 1, y)->GetBuildingType() == central)
-                            give_output_minacC = true;
-                    }
-                    if (y - 1 >= 0) {
-                        if (island->GetZone(x, y - 1)->GetBuildingType() == minaf)
-                            give_output_minaf = true;
-                        else if (island->GetZone(x, y - 1)->GetBuildingType() == minac ||
-                                 island->GetZone(x, y - 1)->GetBuildingType() == central)
-                            give_output_minacC = true;
-                    }
-                    if (y + 1 <= island->GetRows()) {
-                        if (island->GetZone(x, y + 1)->GetBuildingType() == minaf)
-                            give_output_minaf = true;
-                        else if (island->GetZone(x, y + 1)->GetBuildingType() == minac ||
-                                 island->GetZone(x, y + 1)->GetBuildingType() == central)
-                            give_output_minacC = true;
-                    }
-                    if (give_output_minaf && give_output_minacC)
-                        player->GiveSteel(island->GetZone(x, y)->GetBuilding()->GetOutput() / 2);
-                }
-            }
-     }
-}
 
 
 void App::NewDay() {

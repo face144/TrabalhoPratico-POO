@@ -44,32 +44,32 @@ public:
 
 class Minaf : public Building{
 public:
-    void GetOutput(Player* player) const;
     Minaf();
 };
 
 class Minac : public Building{
 public:
-    void GetOutput(Player* player) const;
     Minac();
 };
 
 class Central : public Building{
 public:
-    void GetOutput(Player* player) const;
     Central();
 };
 
 class Bat : public Building{
 public:
-    void GetOutput(Player* player) const;
     Bat();
 };
 
 class Fund : public Building{
 public:
-    void GetOutput(Player* player) const;
     Fund();
+};
+
+class Serr : public Building{
+public:
+    Serr();
 };
 
 class Edx : public Building{
