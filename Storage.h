@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <vector>
-#include "Resources.h"
+#include "Resource.h"
 
 using namespace std;
 
@@ -17,8 +17,8 @@ public:
 
     static Storage* Create();
 
-    int* GetCap(string type);
-    int* GetMaxCap(string type);
+    int GetCap(string type);
+    int GetMaxCap(string type);
 
     void SetCap(string type, int cap);
     void SetMaxCap(string type, int max_cap);

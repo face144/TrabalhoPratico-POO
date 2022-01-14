@@ -12,18 +12,18 @@ using namespace std;
 class Resource{
 protected:
     string type;
-    float* value;
-    int* quantity;
-    int* max;
+    float value;
+    int quantity;
+    int max;
 
 public:
     Resource();
     static Resource* Create(string type);
 
-    int* GetMax();
-    int* GetQuant();
+    int GetMax();
+    int GetQuant();
     string GetType();
-    float* GetValue();
+    float GetValue();
 
     void SetMax(int &max);
     void SetQuant(int &quant);

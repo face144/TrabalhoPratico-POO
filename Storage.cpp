@@ -1,7 +1,12 @@
 #include "Storage.h"
 
 Storage::Storage() {
-
+    storage.push_back(Resource::Create("iron"));
+    storage.push_back(Resource::Create("steel"));
+    storage.push_back(Resource::Create("coal"));
+    storage.push_back(Resource::Create("wood"));
+    storage.push_back(Resource::Create("wood_beam"));
+    storage.push_back(Resource::Create("electricity"));
 }
 
 Storage::~Storage() {
@@ -9,32 +14,21 @@ Storage::~Storage() {
 }
 
 Storage* Storage::Create() {
-    Storage* storage = new Storage;
-
-    storage->storage.push_back(Resource::Create("iron"));
-    storage->storage.push_back(Resource::Create("steel"));
-    storage->storage.push_back(Resource::Create("coal"));
-    storage->storage.push_back(Resource::Create("wood"));
-    storage->storage.push_back(Resource::Create("wood_beam"));
-    storage->storage.push_back(Resource::Create("electricity"));
-
-    return storage;
+    return new Storage;
 }
 
-int* Storage::GetCap(string type) {
+int Storage::GetCap(string type) {
     for (auto &r : storage) {
         if (r->GetType() == type)
             return r->GetQuant();
     }
-    return nullptr;
 }
 
-int* Storage::GetMaxCap(string type) {
+int Storage::GetMaxCap(string type) {
     for (auto &r : storage) {
         if (r->GetType() == type)
             return r->GetMax();
     }
-    return nullptr;
 }
 
 void Storage::SetCap(string type, int cap) {
