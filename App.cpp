@@ -48,6 +48,10 @@ void App::PrintIsland() {
     cout << island->PrintIsland();
 }
 
+void App::PrintCell(int x, int y) {
+    cout << island->GetZone(x, y)->GetCellInfo();
+}
+
 void App::PrintHUD() {
     ostringstream oss;
 
@@ -84,7 +88,7 @@ int App::CheckSyntax() {
     if (input.empty())
         return 0;
 
-    input.resize(20, " ");
+    //input.resize(20, " ");
 
     for (int i = 0; i < input.size(); ++i) {
 
@@ -137,7 +141,10 @@ int App::CheckSyntax() {
             }
 
         } else if (input.at(i) == "list") {
-
+            if (input.size() == 3) {
+                x = stoi(input.at(++i)) - 1;
+                y = stoi(input.at(++i)) - 1;
+            }
             return 6;
 
         } else if (input.at(i) == "next") {
@@ -175,8 +182,15 @@ int App::CheckSyntax() {
 
             x = stoi(input.at(++i)) - 1;
             y = stoi(input.at(++i)) - 1;
-
             return 13;
+
+        } else if (input.at(i) == "altcons") {
+
+            type = input.at(++i);
+            x = stoi(input.at(++i)) - 1;
+            y = stoi(input.at(++i)) - 1;
+            return 14;
+
         }
     }
         return 0;
@@ -216,17 +230,23 @@ void App::Execute(int cmd_code) {
             island->MoveWorker(type, &x, &y);
             break;
 
+
         case 5:
-            //Todo: Criar funcao para ver os guitos e por o que esta aqui nessa funcao;
-            island->GetZone(x, y)->SetWorker(type, *day, *worker_cnt);
-            worker_cnt++;
-            //cout << "Comando nao implementado!\n";
+            if ( CheckWorkerPurchase() ) {
+                island->GetZone(x, y)->SetWorker(type, *day, *worker_cnt);
+                (*worker_cnt)++;
+            }
             break;
 
         case 6:
             system("cls");
-            PrintHUD();
-            PrintIsland();
+            if (x == -1 && y == -1) {
+                PrintHUD();
+                PrintIsland();
+            } else {
+                PrintCell(x, y);
+            }
+
             break;
 
         case 7:
@@ -263,6 +283,13 @@ void App::Execute(int cmd_code) {
             LevelUp();
             break;
 
+        case 14:
+            if ( CheckAltPurchase() )
+                island->GetZone(x, y)->SetBuilding(type);
+            else
+                cout << "Erro na construcao do edificio!\n";
+            break;
+
         default:
             cout << "Comando invalido!\n";
             break;
@@ -278,7 +305,7 @@ void App::ReadFromFile() {
 
     fs.open(type, ios::in);
     if (!fs.is_open()) {
-        cout << "Erro ao abrir o ficheiro: " << type << ".\n";
+        cout << "Erro ao abrir o ficheiro: " << type << '.' << endl;
         return;
     }
 
@@ -367,6 +394,34 @@ bool App::CheckPurchase() {
     return false;
 }
 
+bool App::CheckAltPurchase() {
+
+    if (type == "minaf" || type == "minac") {
+        if (island->GetZone(x, y)->GetType() == mnt)
+            return player->TakeMoney( mina_cost_alt * 2);
+        else
+            return player->TakeMoney(mina_cost_alt);
+
+    }
+    return false;
+}
+
+bool App::CheckWorkerPurchase() {
+
+    if ( type == "operario" ) {
+        return player->TakeMoney(oper_cost);
+
+    } else if ( type == "lenhador") {
+        return player->TakeMoney(lenh_cost);
+
+    } else if ( type == "mineiro" ) {
+        return player->TakeMoney(mine_cost);
+
+    }
+
+    return false;
+}
+
 void App::LevelUp() {  //Trocar valores
     if(island->GetZone(x, y)->GetBuildingType() == minaf) {
         if (island->GetZone(x, y)->GetBuilding()->LevelUp() && player->TakeWoodBeam(1) && player->TakeMoney(15))
@@ -402,7 +457,7 @@ void App::LevelUp() {  //Trocar valores
 
 void App::GiveResources(int x, int y) {
     string building_type = island->GetZone(x, y)->GetBuildingType();
-    if (!island->GetZone(x, y)->GetBuilding()->IsOnline())
+    if ( !island->GetZone(x, y)->GetBuilding()->IsOnline() )
         return;
 
     if (island->GetZone(x, y)->GetType() == flr) {
@@ -436,21 +491,21 @@ void App::GiveResources(int x, int y) {
 
     } else if (island->GetZone(x, y)->GetType() == mnt) {
 
-            if (island->GetZone(x, y)->GetBuildingType() == minaf) {
-                vector <Worker*> temp_list = island->GetZone(x, y)->GetWorkerList();
+        if (island->GetZone(x, y)->GetBuildingType() == minaf) {
+            vector <Worker*> temp_list = island->GetZone(x, y)->GetWorkerList();
 
-                for (auto &w : temp_list)
-                    if (w->GetType() == mine)
-                        player->GiveIron(island->GetZone(x, y)->GetBuilding()->GetOutput() * 2);
+            for (auto &w : temp_list)
+                if (w->GetType() == mine)
+                    player->GiveIron(island->GetZone(x, y)->GetBuilding()->GetOutput() * 2);
 
-            } else if (island->GetZone(x, y)->GetBuildingType() == minac) {
-                vector <Worker*> temp_list = island->GetZone(x, y)->GetWorkerList();
+        } else if (island->GetZone(x, y)->GetBuildingType() == minac) {
+            vector <Worker*> temp_list = island->GetZone(x, y)->GetWorkerList();
 
-                for (auto &w : temp_list)
-                    if (w->GetType() == mine)
-                        player->GiveCoal(island->GetZone(x, y)->GetBuilding()->GetOutput() * 2);
+            for (auto &w : temp_list)
+                if (w->GetType() == mine)
+                    player->GiveCoal(island->GetZone(x, y)->GetBuilding()->GetOutput() * 2);
 
-            }
+        }
 
     } else {
 
@@ -493,7 +548,7 @@ void App::GiveResources(int x, int y) {
             }
 
             if (give_output) {
-                vector<Worker *> temp_list = island->GetZone(x, y)->GetWorkerList();
+                vector <Worker *> temp_list = island->GetZone(x, y)->GetWorkerList();
 
                 for (auto &w: temp_list)
                     if (w->GetType() == oper)
@@ -584,9 +639,15 @@ void App::NewDay() {
     for (int i = 0; i < island->GetRows(); i++)
         for (int j = 0; j < island->GetCols(); j++) {
             GiveResources(i, j);
+
             island->GetZone(i, j)->DestroyProbHandler(day);
             island->GetZone(i, j)->QuitProbHandler(*day);
             island->GetZone(i, j)->GetBuilding()->NextDay();
+
+            vector <Worker*> temp = island->GetZone(i, j)->GetWorkerList();
+            for (auto &w : temp) {
+                w->SetHasMoved(false);
+            }
 
             if (island->GetZone(i, j)->GetType() == rad && island->GetZone(i, j)->GetBuildingType() != filt)
                 island->GetZone(i, j)->KillWorkers();

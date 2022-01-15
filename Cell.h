@@ -49,6 +49,7 @@ public:
     void SetBuilding(const string& type = "undef");
     Building* GetBuilding();
     void KillWorkers();
+    string GetCellInfo();
 };
 
 

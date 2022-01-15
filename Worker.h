@@ -15,6 +15,7 @@ protected:
     string type;
     int days;
     float quitProb;
+    bool has_moved;
 
     void AssignID(int* day, int* worker_nr);
 
@@ -27,6 +28,8 @@ public:
     static Worker* Create(const string& type, int* days, int* worker_nr);
     void UpdateQuitProb(int &days);
     float GetQuitProb() const;
+    bool HasMoved();
+    void SetHasMoved(bool has_moved);
 
 };
 

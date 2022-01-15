@@ -30,10 +30,6 @@ string Island::PrintIsland() {
             oss << " -----------------";
         oss << endl;
 
-        /*for (int i = 0; i < cols; ++i)
-            oss << "|ID:" << zone.at(j * rows + i)->id << "             ";
-        oss << '|' << endl;*/
-
         for (int i = 0; i < cols; ++i)
             oss << "|Bioma:" << zone.at(j * rows + i)->GetType();
         oss << '|' << endl;
@@ -128,11 +124,6 @@ void Island::LoadData(const string& filename) {
             rows = stoi(_rows);
             generate_map++;
         }
-        /*if (generate_map == 2) {
-            for (int i = 0; i < cols * rows; ++i)
-                zone.emplace_back(Cell::Create());
-            generate_map = 0;
-        }*/
 
         if (data.at(0) == 'i') {
             new_cell = true;
@@ -241,14 +232,24 @@ void Island::DestroyTrees() {
     }
 }
 
+Worker* Island::FindWorker(string id) {
+    for (auto &z : zone) {
+        for (auto &w : z->GetWorkerList()) {
+            if (w->GetID() == id)
+                return w;
+        }
+    }
+    return nullptr;
+}
+
 void Island::MoveWorker(string id, int* x, int* y) {
     for (auto &z : zone) {
-        if (z->GetWorker(id) != nullptr) {
+        if ( z->GetWorker(id) != nullptr && !z->GetWorker(id)->HasMoved() ) {
             SpawnWorker(z->GetWorker(id), *x * rows + *y);
+            z->GetWorker(id)->SetHasMoved(true);
             z->DeleteWorker(id);
             return;
         }
-    }
 
 }
 

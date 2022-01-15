@@ -17,7 +17,7 @@ protected:
     bool needs_worker;
     int cap;
     int max_cap;
-    int output;
+    float output;
     int days;
 
 public:
@@ -34,7 +34,7 @@ public:
     void SetLevel(int lvl);
     int GetLevel();
     float GetDestroyProb() const;
-    int GetOutput() const;
+    float GetOutput() const;
 
     static Building* Create(const string& type);
     string GetType() const;

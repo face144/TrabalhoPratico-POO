@@ -4,6 +4,7 @@ Worker::Worker() {
     id = "undef";
     quitProb = 0;
     days = 0;
+    has_moved = false;
 }
 
 Worker::~Worker() {
@@ -33,12 +34,15 @@ Worker* Worker::Create(const string& type, int* day, int* worker_nr) {
     if (type == "operario") {
         worker = new Operario();
         worker->AssignID(day, worker_nr);
+        worker->has_moved = false;
     } else if (type == "lenhador") {
         worker = new Lenhador();
         worker->AssignID(day, worker_nr);
+        worker->has_moved = false;
     } else if (type == "mineiro") {
         worker = new Mineiro;
         worker->AssignID(day, worker_nr);
+        worker->has_moved = false;
     } else {
         return nullptr;
     }
@@ -59,6 +63,14 @@ void Worker::UpdateQuitProb(int &day){
 
 float Worker::GetQuitProb() const {
     return quitProb;
+}
+
+bool Worker::HasMoved() {
+    return has_moved;
+}
+
+void Worker::SetHasMoved(bool has_moved) {
+    this->has_moved = has_moved;
 }
 
 Operario::Operario() {

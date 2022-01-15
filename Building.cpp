@@ -59,7 +59,7 @@ float Building::GetDestroyProb() const {
     return destroy_prob;
 }
 
-int Building::GetOutput() const {
+float Building::GetOutput() const {
     return output;
 }
 

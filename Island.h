@@ -30,6 +30,7 @@ public:
     void RadiationUpdate(int& day);
     void GrowTrees();
     void DestroyTrees();
+    Worker* FindWorker(string id);
 
     void MoveWorker(string id, int* x, int* y);
     void SpawnWorker(Worker* worker, int pos);

@@ -156,3 +156,27 @@ void Cell::KillWorkers() {
     worker_list.erase(worker_list.begin(), worker_list.end());
     //worker_list.clear();
 }
+
+string Cell::GetCellInfo() {
+    ostringstream oss;
+
+    oss << "Informacao da zona" << endl << endl;
+    oss << " ---------------------------" << endl;
+    oss << "| Bioma: " << type << endl;
+    oss << "| Edificio: " << building->GetType() << endl;
+    oss << "| Trabalhadores: " << endl;
+
+    if ( !worker_list.empty() )
+        for (int i = 0 ; i < worker_list.size() ; i++ ) {
+            oss << "| Trabalhador nr. " << i + 1 << endl;
+            oss << "| ID: " << worker_list.at(i)->GetID() << ';' << endl;
+            oss << "| Tipo: " << worker_list.at(i)->GetType() << ';' << endl;
+            oss << "| Probabilidade de demissao: " << worker_list.at(i)->GetQuitProb() * 100 << '%' << '.' << endl;
+        }
+    else
+        oss << "| Nao existem trabalhadores." << endl;
+
+    oss << endl;
+
+    return oss.str();
+}

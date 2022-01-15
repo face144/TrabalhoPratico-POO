@@ -8,6 +8,12 @@
 #define fund_cost 10
 #define filt_cost 20
 
+#define mina_cost_alt 10
+
+#define oper_cost 15
+#define lenh_cost 20
+#define mine_cost 10
+
 #define undef "             "
 #define minaf "minaf        "
 #define minac "minac        "

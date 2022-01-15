@@ -23,6 +23,8 @@ private:
     bool CheckCoords();
     void Execute(int cmd_code);
     bool CheckPurchase();
+    bool CheckWorkerPurchase();
+    bool CheckAltPurchase();
     void LevelUp();
     void GiveResources(int x, int y);
     void UpdateStorage();
@@ -36,6 +38,7 @@ public:
     ~App();
 
     void PrintIsland();
+    void PrintCell(int x, int y);
     void PrintHUD();
     void Init();
     void GetInput();
