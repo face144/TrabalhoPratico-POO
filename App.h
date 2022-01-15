@@ -19,13 +19,13 @@ private:
 
     vector <string> input;
 
-
     int CheckSyntax();
     bool CheckCoords();
     void Execute(int cmd_code);
     bool CheckPurchase();
-    bool LevelUp();
+    void LevelUp();
     void GiveResources(int x, int y);
+    void UpdateStorage();
     void NewDay();
     void ReadFromFile();
     void SaveGame() const;

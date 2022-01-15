@@ -28,9 +28,11 @@ public:
     string GetIslandSaveData() const;
     void LoadData(const string& filename);
     void RadiationUpdate(int& day);
+    void GrowTrees();
+    void DestroyTrees();
 
-    bool MoveWorker(string id, int* x, int* y);
-    void SpawnWorker(Worker* worker);
+    void MoveWorker(string id, int* x, int* y);
+    void SpawnWorker(Worker* worker, int pos);
 
     Cell* GetZone(int x, int y);
     void SetBuilding(int x, int y, const string& type);

@@ -13,9 +13,9 @@ Worker::~Worker() {
 
 void Worker::AssignID(int* day, int* worker_nr) {
     ostringstream oss;
-    oss << worker_nr;
+    oss << *worker_nr;
     oss << '.';
-    oss << day;
+    oss << *day;
     id = oss.str();
 }
 
@@ -43,6 +43,7 @@ Worker* Worker::Create(const string& type, int* day, int* worker_nr) {
         return nullptr;
     }
 
+    cout << "Criado trabalhor do tipo " << worker->type << " com o id " << worker->id << endl;
     return worker;
 }
 

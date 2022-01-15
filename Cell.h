@@ -21,6 +21,7 @@ private:
     string type;
     Building* building;
     vector <Worker*> worker_list;
+    int trees;
 
 public:
     //int id;
@@ -34,10 +35,14 @@ public:
     string GetWorkerCount();
     void SetType(string type);
     string GetType();
+    int GetTrees();
+    void GrowTrees();
+    void DestroyTrees();
     string GetWorkersString();
     vector <Worker*> GetWorkerList();
     Worker* GetWorker(string id);
     void SetWorker(string type, int &day, int &worker_nr);
+    void PasteWorker(Worker* worker);
     void DeleteWorker(string id);
     string GetBuildingType();
 

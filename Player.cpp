@@ -10,35 +10,35 @@ Player::~Player() {
     delete storage;
 }
 
-int Player::GetMoney() {
+float Player::GetMoney() {
     return money;
 }
 
-int Player::GetIron() {
+float Player::GetIron() {
     return storage->GetCap("iron");
 }
 
-int Player::GetSteel() {
+float Player::GetSteel() {
     return storage->GetCap("steel");
 }
 
-int Player::GetCoal() {
+float Player::GetCoal() {
     return storage->GetCap("coal");
 }
 
-int Player::GetWood() {
+float Player::GetWood() {
     return storage->GetCap("wood");
 }
 
-int Player::GetWoodBeam() {
+float Player::GetWoodBeam() {
     return storage->GetCap("wood_beam");
 }
 
-int Player::GetElectricity() {
+float Player::GetElectricity() {
     return storage->GetCap("electricity");
 }
 
-bool Player::TakeMoney(int money) {
+bool Player::TakeMoney(float money) {
     if (this->money >= money) {
         this->money = this->money - money;
         return true;
@@ -46,7 +46,7 @@ bool Player::TakeMoney(int money) {
 
 }
 
-bool Player::TakeIron(int iron) {
+bool Player::TakeIron(float iron) {
     if (this->storage->GetCap("iron") >= iron) {
         this->storage->SetCap("iron", this->storage->GetCap("iron") - iron);
         return true;
@@ -54,7 +54,7 @@ bool Player::TakeIron(int iron) {
 
 }
 
-bool Player::TakeSteel(int steel) {
+bool Player::TakeSteel(float steel) {
     if (storage->GetCap("steel") >= steel) {
         this->storage->SetCap("steel" ,this->storage->GetCap("steel") - steel);
         return true;
@@ -62,7 +62,7 @@ bool Player::TakeSteel(int steel) {
 
 }
 
-bool Player::TakeCoal(int coal) {
+bool Player::TakeCoal(float coal) {
     if (storage->GetCap("coal") >= coal) {
         this->storage->SetCap("coal",this->storage->GetCap("coal") - coal);
         return true;
@@ -70,7 +70,7 @@ bool Player::TakeCoal(int coal) {
 
 }
 
-bool Player::TakeWood(int wood) {
+bool Player::TakeWood(float wood) {
     if (storage->GetCap("wood") >= wood) {
         this->storage->SetCap("wood",this->storage->GetCap("wood") - wood);
         return true;
@@ -78,7 +78,7 @@ bool Player::TakeWood(int wood) {
 
 }
 
-bool Player::TakeWoodBeam(int wood_beam) {
+bool Player::TakeWoodBeam(float wood_beam) {
     if (storage->GetCap("wood_beam") >= wood_beam) {
         this->storage->SetCap("wood_beam",this->storage->GetCap("wood_beam") - wood_beam);
         return true;
@@ -86,7 +86,7 @@ bool Player::TakeWoodBeam(int wood_beam) {
 
 }
 
-bool Player::TakeElectricity(int electricity) {
+bool Player::TakeElectricity(float electricity) {
     if (storage->GetCap("electricity") >= electricity) {
         this->storage->SetCap("electricity",this->storage->GetCap("electricity") - electricity);
         return true;
@@ -94,17 +94,17 @@ bool Player::TakeElectricity(int electricity) {
 
 }
 
-void Player::GiveMoney(int money) {
+void Player::GiveMoney(float money) {
     this->money += money;
 }
 
-void Player::GiveIron(int iron) {
+void Player::GiveIron(float iron) {
     storage->SetCap("iron", storage->GetCap("iron") + iron);
     if (storage->GetCap("iron") > storage->GetMaxCap("iron"))
         storage->SetCap("iron", storage->GetMaxCap("iron"));
 }
 
-void Player::GiveSteel(int steel) {
+void Player::GiveSteel(float steel) {
     if (TakeIron(1) && TakeCoal(1)) {
         storage->SetCap("steel", storage->GetCap("steel") + steel);
         if (storage->GetCap("steel") > storage->GetMaxCap("steel"))
@@ -112,25 +112,25 @@ void Player::GiveSteel(int steel) {
     }
 }
 
-void Player::GiveCoal(int coal) {
+void Player::GiveCoal(float coal) {
     storage->SetCap("coal", storage->GetCap("coal") + coal);
     if (storage->GetCap("coal") > storage->GetMaxCap("coal"))
         storage->SetCap("coal", storage->GetMaxCap("coal"));
 }
 
-void Player::GiveWood(int wood) {
+void Player::GiveWood(float wood) {
     storage->SetCap("wood", storage->GetCap("wood") + wood);
     if (storage->GetCap("wood") > storage->GetMaxCap("wood"))
         storage->SetCap("wood", storage->GetMaxCap("wood"));
 }
 
-void Player::GiveWoodBeam(int wood_beam) {
+void Player::GiveWoodBeam(float wood_beam) {
     storage->SetCap("wood_beam", storage->GetCap("wood_beam") + wood_beam);
     if (storage->GetCap("wood_beam") > storage->GetMaxCap("wood_beam"))
         storage->SetCap("wood_beam", storage->GetMaxCap("wood_beam"));
 }
 
-void Player::GiveElectricity(int electricity) {
+void Player::GiveElectricity(float electricity) {
     storage->SetCap("electricity", storage->GetCap("electricity") + electricity);
     if (storage->GetCap("electricity") > storage->GetMaxCap("electricity"))
         storage->SetCap("electricity", storage->GetMaxCap("electricity"));
@@ -138,6 +138,10 @@ void Player::GiveElectricity(int electricity) {
 
 string Player::GetUsername() {
     return username;
+}
+
+Storage* Player::GetStorage() {
+    return storage;
 }
 
 Player* Player::Create(string username) {

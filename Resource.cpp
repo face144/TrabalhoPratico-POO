@@ -6,11 +6,11 @@ Resource::Resource() {
     max = 0;
 }
 
-int Resource::GetMax() {
+float Resource::GetMax() {
     return max;
 }
 
-int Resource::GetQuant() {
+float Resource::GetQuant() {
     return quantity;
 }
 
@@ -26,7 +26,7 @@ void Resource::SetMax(int& max) {
     this->max = max;
 }
 
-void Resource::SetQuant(int& quant) {
+void Resource::SetQuant(float& quant) {
     this->quantity = quant;
 }
 
@@ -62,8 +62,8 @@ Resource* Resource::Create(string type) {
     } else
         return nullptr;
 
-    resource->quantity = 100;
-    resource->max = 1000;
+    resource->quantity = 0;
+    resource->max = 0;
     resource->type = type;
     return resource;
 

@@ -17,10 +17,10 @@ public:
 
     static Storage* Create();
 
-    int GetCap(string type);
-    int GetMaxCap(string type);
+    float GetCap(string type);
+    float GetMaxCap(string type);
 
-    void SetCap(string type, int cap);
+    void SetCap(string type, float cap);
     void SetMaxCap(string type, int max_cap);
 
 

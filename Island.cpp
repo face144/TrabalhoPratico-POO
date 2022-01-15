@@ -227,19 +227,33 @@ void Island::RadiationUpdate(int& day) {
     }
 }
 
-bool Island::MoveWorker(string id, int* x, int* y) {
+void Island::GrowTrees() {
+    for (auto &z : zone) {
+        if (z->GetType() == flr && z->GetBuildingType() == undef)
+            z->GrowTrees();
+    }
+}
+
+void Island::DestroyTrees() {
+    for (auto &z : zone) {
+        if (z->GetType() == flr && z->GetBuildingType() != undef)
+            z->DestroyTrees();
+    }
+}
+
+void Island::MoveWorker(string id, int* x, int* y) {
+    for (auto &z : zone) {
+        if (z->GetWorker(id) != nullptr) {
+            SpawnWorker(z->GetWorker(id), *x * rows + *y);
+            z->DeleteWorker(id);
+            return;
+        }
+    }
 
 }
 
-void Island::SpawnWorker(Worker* worker) {
-    zone.at(1)->GetWorkerList().emplace_back(worker);
-    for (auto &worker : zone.at(1)->GetWorkerList()) {
-        if (worker != nullptr)
-            cout << worker->GetID() << endl;
-
-        else cout << "Worker is nullptr" << endl;
-
-    }
+void Island::SpawnWorker(Worker* worker, int pos) {
+    zone.at(pos)->PasteWorker(worker);
 }
 
 Cell* Island::GetZone(const int x, const int y) {

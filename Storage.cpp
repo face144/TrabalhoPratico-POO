@@ -17,25 +17,25 @@ Storage* Storage::Create() {
     return new Storage;
 }
 
-int Storage::GetCap(string type) {
+float Storage::GetCap(string type) {
     for (auto &r : storage) {
         if (r->GetType() == type)
             return r->GetQuant();
     }
 }
 
-int Storage::GetMaxCap(string type) {
+float Storage::GetMaxCap(string type) {
     for (auto &r : storage) {
         if (r->GetType() == type)
             return r->GetMax();
     }
 }
 
-void Storage::SetCap(string type, int cap) {
+void Storage::SetCap(string type, float cap) {
     // Todo: ver se da erro por usar ponteiro
     for (auto &r : storage) {
         if (r->GetType() == type)
-            return r->SetQuant(cap);
+            r->SetQuant(cap);
     }
 }
 
@@ -43,6 +43,6 @@ void Storage::SetMaxCap(string type, int max_cap) {
     // Todo: ver se da erro por usar ponteiro
     for (auto &r : storage) {
         if (r->GetType() == type)
-            return r->SetMax(max_cap);
+            r->SetMax(max_cap);
     }
 }

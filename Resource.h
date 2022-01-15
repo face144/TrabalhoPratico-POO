@@ -13,20 +13,20 @@ class Resource{
 protected:
     string type;
     float value;
-    int quantity;
-    int max;
+    float quantity;
+    float max;
 
 public:
     Resource();
     static Resource* Create(string type);
 
-    int GetMax();
-    int GetQuant();
+    float GetMax();
+    float GetQuant();
     string GetType();
     float GetValue();
 
     void SetMax(int &max);
-    void SetQuant(int &quant);
+    void SetQuant(float &quant);
 
 };
 

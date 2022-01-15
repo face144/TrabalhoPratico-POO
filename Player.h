@@ -10,37 +10,38 @@ using namespace std;
 class Player {
     string username;
     Storage* storage;
-    int money;
+    float money;
 
 public:
     Player();
     ~Player();
 
-    int GetMoney();
-    int GetIron();
-    int GetSteel();
-    int GetCoal();
-    int GetWood();
-    int GetWoodBeam();
-    int GetElectricity();
+    float GetMoney();
+    float GetIron();
+    float GetSteel();
+    float GetCoal();
+    float GetWood();
+    float GetWoodBeam();
+    float GetElectricity();
 
-    bool TakeMoney(int money);
-    bool TakeIron(int iron);
-    bool TakeSteel(int steel);
-    bool TakeCoal(int coal);
-    bool TakeWood(int wood);
-    bool TakeWoodBeam(int wood_beam);
-    bool TakeElectricity(int electricity);
+    bool TakeMoney(float money);
+    bool TakeIron(float iron);
+    bool TakeSteel(float steel);
+    bool TakeCoal(float coal);
+    bool TakeWood(float wood);
+    bool TakeWoodBeam(float wood_beam);
+    bool TakeElectricity(float electricity);
 
-    void GiveMoney(int money);
-    void GiveIron(int iron);
-    void GiveSteel(int steel);
-    void GiveCoal(int coal);
-    void GiveWood(int wood);
-    void GiveWoodBeam(int wood_beam);
-    void GiveElectricity(int electricity);
+    void GiveMoney(float money);
+    void GiveIron(float iron);
+    void GiveSteel(float steel);
+    void GiveCoal(float coal);
+    void GiveWood(float wood);
+    void GiveWoodBeam(float wood_beam);
+    void GiveElectricity(float electricity);
 
     string GetUsername();
+    Storage* GetStorage();
 
     static Player* Create(string username);
 };

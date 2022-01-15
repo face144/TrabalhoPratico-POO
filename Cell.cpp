@@ -3,6 +3,7 @@
 Cell::Cell() {
     type = "undef";
     building = nullptr;
+    trees = 0;
 }
 
 Cell::~Cell() {
@@ -29,6 +30,8 @@ Cell* Cell::Create(const string& type) {
 
             case 4:
                 zone->type = flr;
+                zone->trees = 20;
+                zone->trees += rand() % 20;
                 break;
 
             case 5:
@@ -74,16 +77,28 @@ string Cell::GetType() {
     return type;
 }
 
+int Cell::GetTrees() {
+    return trees;
+}
+
+void Cell::GrowTrees() {
+    trees++;
+    if (trees > 100)
+        trees = 100;
+}
+
+void Cell::DestroyTrees() {
+    trees--;
+    if (trees < 0)
+        trees = 0;
+}
+
 string Cell::GetWorkerCount() {
     ostringstream oss;
     oss << worker_list.size();
 
-    if (worker_list.size() > 11)
-        oss.str().resize(11);
-    else if (worker_list.size() < 11)
-        oss.str().resize(11, '.');
+    oss.str().resize(11, ' ');
 
-    oss.str().resize(11, '.');
     return oss.str();
 }
 
@@ -92,10 +107,7 @@ string Cell::GetWorkersString() {
     for (auto & i : worker_list)
         oss << i->GetType() << ' ';
 
-    if (worker_list.size() > 11)
-        oss.str().resize(11);
-    else if (worker_list.size() < 11)
-        oss.str().resize(11, ' ');
+    oss.str().resize(11, ' ');
 
     return oss.str();
 }
@@ -117,10 +129,14 @@ void Cell::SetWorker(string type, int &day, int &worker_nr) {
     worker_list.emplace_back(Worker::Create(type, &day, &worker_nr));
 }
 
+void Cell::PasteWorker(Worker *worker) {
+    worker_list.emplace_back(worker);
+}
+
 void Cell::DeleteWorker(string id) {
-    for (auto &worker : worker_list) {
-        if (worker->GetID() == id)
-            delete worker;
+    for (int i = 0; i < worker_list.size(); i++) {
+        if (worker_list.at(i)->GetID() == id)
+            worker_list.erase(worker_list.begin() + i);
     }
 }
 
