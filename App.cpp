@@ -194,6 +194,25 @@ int App::CheckSyntax() {
             y = stoi(input.at(++i)) - 1;
             return 14;
 
+        } else if (input.at(i) == "Vende") {
+
+            type = input.at(++i);
+            x = stoi(input.at(++i));
+            return 15;
+        } else if (input.at(i) == "debcash") {
+
+            v = stoi(input.at(++i));
+            return 16;
+        } else if (input.at(i) == "debed") {
+
+            type = input.at(++i);
+            x = stoi(input.at(++i)) - 1;
+            y = stoi(input.at(++i)) - 1;
+            return 17;
+        } else if (input.at(i) == "debkill") {
+
+            x = stoi(input.at(++i)) - 1;
+            return 18;
         }
     }
         return 0;
@@ -271,8 +290,9 @@ void App::Execute(int cmd_code) {
             if (island->GetZone(x, y)->GetBuildingType() == undef)
                 cout << "Nenhum edifico nessa zona!\n";
             else {
+                SellBuilding(island->GetZone(x,y)->GetBuildingType());
                 island->GetZone(x, y)->SetBuilding();
-                //player-
+
             }
             break;
 
@@ -297,6 +317,34 @@ void App::Execute(int cmd_code) {
             else
                 cout << "Erro na construcao do edificio!\n";
             break;
+
+        case 15:
+            SellResource(type, x);
+            break;
+
+        case 16:
+
+            player->GiveMoney(v);
+            break;
+
+        case 17:
+            island->GetZone(x,y)->SetBuilding(type);
+            break;
+
+        case 18:
+            for (int i = 0; i < island->GetCols(); ++i) {
+                for (int j = 0; j < island->GetRows(); ++j) {
+
+                    vector <Worker*> temp = island->GetZone(i, j)->GetWorkerList();
+                    for (auto &worker : temp) {
+                        if (worker->GetID() == type) {
+                            delete island->GetZone(i, j)->GetWorker(type);
+                        }
+                    }
+                }
+            }
+            break;
+
 
         default:
             cout << "Comando invalido!\n";
@@ -716,6 +764,62 @@ void App::NewDay() {
     UpdateStorage();
 
     cout << "It's a new daaaaaawwnnn, It's a new daaaaaay!\n";
+}
+
+void App::SellResource(string type, int quant) {
+    if (type == "iron") {
+        player->GiveMoney(1 * quant);
+        player->TakeIron(quant);
+    }
+    else if (type == "wood") {
+        player->GiveMoney(1 * quant);
+        player->TakeWood(quant);
+    }
+    else if (type == "electricity") {
+        player->GiveMoney(1 * quant);
+        player->TakeIron(quant);
+    }
+    else if (type == "woodbeam") {
+        player->GiveMoney(2 * quant);
+        player->TakeWoodBeam(quant);
+    }
+    else if (type == "steal") {
+        player->GiveMoney(2 * quant);
+        player->TakeSteel(quant);
+    }
+    else if (type == "coal") {
+        player->GiveMoney(1 * quant);
+        player->TakeCoal(quant);
+    }
+    else {
+        player->GiveMoney(0 * quant);
+        player->TakeCoal(0);
+    }
+}
+
+
+void App::SellBuilding(string type){
+
+    if (type == minaf){
+        player->GetStorage()->SetMaxCap("iron", player->GetStorage()->GetMaxCap("iron") - 100);
+        player->GiveMoney(100);
+    }
+    else if (type == minac){
+        player->GetStorage()->SetMaxCap("coal", player->GetStorage()->GetMaxCap("coal") - 100);
+        player->GiveMoney(100);
+    }
+    else if (type == central){
+        player->GetStorage()->SetMaxCap("coal", player->GetStorage()->GetMaxCap("coal") - 100);
+        player->GiveMoney(15);
+    }
+    else if (type == bat){
+        player->GetStorage()->SetMaxCap("electricity", player->GetStorage()->GetMaxCap("electricity") - 100);
+        player->GiveMoney(10);
+    }
+    else if (type == fund){
+        player->GetStorage()->SetMaxCap("steal", player->GetStorage()->GetMaxCap("steal") - 100);
+        player->GiveMoney(10);
+    }
 }
 
 void App::SaveGame() const {

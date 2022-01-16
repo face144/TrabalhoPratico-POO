@@ -15,6 +15,7 @@ private:
     Player* player;
 
     int x, y, *day, *worker_cnt;
+    float v;
     string type;
 
     vector <string> input;
@@ -32,6 +33,8 @@ private:
     void ReadFromFile();
     void SaveGame() const;
     void LoadGame(string &username);
+    void SellBuilding(string type);
+    void SellResource(string type, int quant);
 
 public:
     App();

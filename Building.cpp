@@ -71,21 +71,21 @@ string Building::GetType() const {
 
 Building* Building::Create(const string& type) {
     Building* building;
-    if (type == "minaf") {
+    if (type == "minaf" || type == minaf) {
         building = new Minaf;
-    } else if (type == "minac") {
+    } else if (type == "minac" || type == minac) {
         building = new Minac;
-    } else if (type == "central") {
+    } else if (type == "central" || type == central) {
         building = new Central;
-    } else if (type == "bat") {
+    } else if (type == "bat" || type == bat) {
         building = new Bat;
-    } else if (type == "fund") {
+    } else if (type == "fund" || type == fund) {
         building = new Fund;
-    } else if (type == "filt") {
+    } else if (type == "filt" || type == filt) {
         building = new Edx;
     } else if (type == undef) {
         building = new Building;
-    }else if (type == "serr") {
+    }else if (type == "serr" || type == serr) {
         building = new Serr;
     } else building = new Building;
     return building;

@@ -126,7 +126,7 @@ void Island::LoadData(const string& filename) {
             generate_map++;
         }
 
-        if (data.at(0) == 'i') {
+        if (data.at(0) == 'i' && data.at(1) != 'd' ) {
             new_cell = true;
             string s_index = data;
             s_index.erase(s_index.begin());
