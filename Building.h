@@ -35,6 +35,7 @@ public:
     int GetLevel();
     float GetDestroyProb() const;
     float GetOutput() const;
+    float GiveMoneyDestroy();
 
     static Building* Create(const string& type);
     string GetType() const;

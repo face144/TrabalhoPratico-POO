@@ -5,19 +5,20 @@ Island::Island(){
 }
 
 Island::~Island() {
-    for (auto &i : zone) {
-        delete i;
+    for (int i = 0; i < cols * rows; i++) {
+        delete zone[i];
     }
+    delete[] zone;
 }
-
 Island* Island::Create(int cols, int rows) {
     auto* map = new Island;
+
     map->cols = cols;
     map->rows = rows;
-    for (int i = 0; i < cols * rows; ++i) {
-        map->zone.push_back(Cell::Create());
-        //map->zone.at(i)->id = i;
-    }
+
+    map->zone = new Cell*[cols * rows];
+    for (int i = 0; i < cols * rows; ++i)
+        map->zone[i] = Cell::Create();
 
     return map;
 }
@@ -28,22 +29,22 @@ string Island::PrintIsland() {
     for (int j = 0; j < rows; ++j) {
         for (int i = 0; i < cols; ++i)
             oss << " -----------------";
-        oss << endl;
+            oss << endl;
 
         for (int i = 0; i < cols; ++i)
-            oss << "|Bioma:" << zone.at(j * rows + i)->GetType();
+            oss << "|Bioma:" << zone[j * rows + i]->GetType();
+            oss << '|' << endl;
+
+        for (int i = 0; i < cols; ++i)
+            oss << "|Ed.:" << zone[j * rows + i]->GetBuildingType();
         oss << '|' << endl;
 
         for (int i = 0; i < cols; ++i)
-            oss << "|Ed.:" << zone.at(j * rows + i)->GetBuildingType();
-        oss << '|' << endl;
+            oss << "|Trab.:" << zone[j * rows + i]->GetWorkersString();
+        oss << "          |" << endl;
 
         for (int i = 0; i < cols; ++i)
-            oss << "|Trab.:" << zone.at(j * rows + i)->GetWorkersString();
-        oss << '|' << endl;
-
-        for (int i = 0; i < cols; ++i)
-            oss << "|Total:" << zone.at(j * rows + i)->GetWorkerCount();
+            oss << "|Total:" << zone[j * rows + i]->GetWorkerCount();
         oss << '|' << endl;
     }
 
@@ -67,7 +68,7 @@ string Island::GetZonesSaveData() const{
     ostringstream oss;
 
     oss << "---start_zone_info" << endl;
-    for (int z = 0; z < zone.size(); ++z) {
+    for (int z = 0; z < cols * rows; ++z) {
         oss << "i" << z << "" << endl;
         oss << "b" << zone[z]->GetType() << "" << endl;
         oss << "e" << zone[z]->GetBuildingType() << "" << endl;
@@ -135,19 +136,19 @@ void Island::LoadData(const string& filename) {
         if (data.at(0) == 'b') {
             data.erase(data.begin());
             string biome = data;
-            zone.at(i_index) = Cell::Create(biome);
+            zone[i_index] = Cell::Create(biome);
         }
 
         if (data.at(0) == 'e') {
             data.erase(data.begin());
             string building = data;
-            zone.at(i_index)->SetBuilding(building);
+            zone[i_index]->SetBuilding(building);
         }
 
         if (data.at(0) == 'n') {
             data.erase(data.begin());
             int building_lvl = stoi(data);
-            zone.at(i_index)->GetBuilding()->SetLevel(building_lvl);
+            zone[i_index]->GetBuilding()->SetLevel(building_lvl);
         }
 
     }
@@ -159,7 +160,7 @@ void Island::LoadData(const string& filename) {
 
 void Island::RadiationUpdate(int& day) {
 
-    for (int i = 0; i < zone.size(); i++) {
+    for (int i = 0; i < cols * rows; i++) {
 
         int left = i - 1;
         int right = i + 1;
@@ -168,50 +169,50 @@ void Island::RadiationUpdate(int& day) {
 
         int lottery = rand() % 4 + 1;
 
-        if (zone.at(i)->GetType() == rad && zone.at(i)->GetBuildingType() != filt) {
+        if (zone[i]->GetType() == rad && zone[i]->GetBuildingType() != filt) {
 
-            zone.at(i)->SetBuilding(undef);
+            zone[i]->SetBuilding(undef);
 
             if (left >= 0 && lottery == 1) {
-                zone.at(left)->SetType(rad);
-                zone.at(left)->SetBuilding(undef);
+                zone[left]->SetType(rad);
+                zone[left]->SetBuilding(undef);
 
-            } else if (right <= zone.size() - 1 && lottery == 2) {
-                zone.at(right)->SetType(rad);
-                zone.at(right)->SetBuilding(undef);
+            } else if (right <= cols * rows - 1 && lottery == 2) {
+                zone[right]->SetType(rad);
+                zone[right]->SetBuilding(undef);
 
             } else if (above >= 0 && lottery == 3) {
-                zone.at(above)->SetType(rad);
-                zone.at(above)->SetBuilding(undef);
+                zone[above]->SetType(rad);
+                zone[above]->SetBuilding(undef);
 
-            } else if (below <= zone.size() - 1 && lottery == 4) {
-                zone.at(below)->SetType(rad);
-                zone.at(below)->SetBuilding(undef);
+            } else if (below <= cols * rows - 1 && lottery == 4) {
+                zone[below]->SetType(rad);
+                zone[below]->SetBuilding(undef);
             }
-        } else if (zone.at(i)->GetType() == rad &&
-                   zone.at(i)->GetBuildingType() == filt &&
-                   zone.at(i)->GetBuilding()->GetLevel() == 2) {
+        } else if (zone[i]->GetType() == rad &&
+                   zone[i]->GetBuildingType() == filt &&
+                   zone[i]->GetBuilding()->GetLevel() == 2) {
 
             switch (rand() % 6 + 1) {
 
                 case 1:
-                    zone.at(i)->SetType(mnt);
+                    zone[i]->SetType(mnt);
                     break;
 
                 case 2:
-                    zone.at(i)->SetType(flr);
+                    zone[i]->SetType(flr);
                     break;
 
                 case 3:
-                    zone.at(i)->SetType(pnt);
+                    zone[i]->SetType(pnt);
                     break;
 
                 case 4:
-                    zone.at(i)->SetType(dsr);
+                    zone[i]->SetType(dsr);
                     break;
 
                 case 5:
-                    zone.at(i)->SetType(pas);
+                    zone[i]->SetType(pas);
                     break;
             }
         }
@@ -219,22 +220,22 @@ void Island::RadiationUpdate(int& day) {
 }
 
 void Island::GrowTrees() {
-    for (auto &z : zone) {
-        if (z->GetType() == flr && z->GetBuildingType() == undef)
-            z->GrowTrees();
+    for (int i = 0; i < cols * rows; i++) {
+        if (zone[i]->GetType() == flr && zone[i]->GetBuildingType() == undef)
+            zone[i]->GrowTrees();
     }
 }
 
 void Island::DestroyTrees() {
-    for (auto &z : zone) {
-        if (z->GetType() == flr && z->GetBuildingType() != undef)
-            z->DestroyTrees();
+    for (int i = 0; i < cols * rows; i++) {
+        if (zone[i]->GetType() == flr && zone[i]->GetBuildingType() != undef)
+            zone[i]->DestroyTrees();
     }
 }
 
 Worker* Island::FindWorker(string id) {
-    for (auto &z : zone) {
-        for (auto &w : z->GetWorkerList()) {
+    for (int i = 0; i < cols * rows; i++) {
+        for (auto &w : zone[i]->GetWorkerList()) {
             if (w->GetID() == id)
                 return w;
         }
@@ -243,24 +244,24 @@ Worker* Island::FindWorker(string id) {
 }
 
 void Island::MoveWorker(string id, int* x, int* y) {
-    for (auto &z : zone) {
-        if ( z->GetWorker(id) != nullptr && !z->GetWorker(id)->HasMoved() ) {
-            SpawnWorker(z->GetWorker(id), *x * rows + *y);
-            z->GetWorker(id)->SetHasMoved(true);
-            z->DeleteWorker(id);
+    for (int i = 0; i < cols * rows; i++) {
+        if (zone[i]->GetWorker(id) != nullptr && !zone[i]->GetWorker(id)->HasMoved()) {
+            SpawnWorker(zone[i]->GetWorker(id), *x * rows + *y);
+            zone[i]->GetWorker(id)->SetHasMoved(true);
+            zone[i]->DeleteWorker(id);
             return;
         }
-
+    }
 }
 
-void Island::SpawnWorker(Worker* worker, int pos) {
-    zone.at(pos)->PasteWorker(worker);
+void Island::SpawnWorker(Worker* worker, int pos){
+    zone[pos]->PasteWorker(worker);
 }
 
 Cell* Island::GetZone(const int x, const int y) {
-    return zone.at(x * rows + y);
+    return zone[x * rows + y];
 }
 
 void Island::SetBuilding(const int x, const int y, const string& type) {
-    zone.at(x * rows + y)->SetBuilding(type);
+    zone[x * rows + y]->SetBuilding(type);
 }

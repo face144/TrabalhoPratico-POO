@@ -164,6 +164,9 @@ int App::CheckSyntax() {
 
         } else if (input.at(i) == "vende") {
 
+            x = stoi(input.at(++i)) - 1;
+            y = stoi(input.at(++i)) - 1;
+
             return 10;
 
         } else if (input.at(i) == "novojogo") {
@@ -258,14 +261,19 @@ void App::Execute(int cmd_code) {
             break;
 
         case 9:
-            if (island->GetZone(x, y)->GetBuildingType() == "undef")
+            if (island->GetZone(x, y)->GetBuildingType() == undef)
                 cout << "Nenhum edifico nessa zona!\n";
             else
                 island->GetZone(x, y)->GetBuilding()->SetOffline();
             break;
 
         case 10:
-            cout << "Comando nao implementado!\n";
+            if (island->GetZone(x, y)->GetBuildingType() == undef)
+                cout << "Nenhum edifico nessa zona!\n";
+            else {
+                island->GetZone(x, y)->SetBuilding();
+                //player-
+            }
             break;
 
         case 11:
@@ -322,60 +330,95 @@ void App::ReadFromFile() {
 
 bool App::CheckPurchase() {
     if (type == "minaf" || type == "minac") {
-        if (island->GetZone(x, y)->GetType() == mnt)
+        if (island->GetZone(x, y)->GetType() == mnt){
+            player->GetStorage()->SetMaxCap("iron", player->GetStorage()->GetMaxCap("iron") + 100);
             return player->TakeWoodBeam(mina_cost * 2);
-        else
+        }
+        else {
+            player->GetStorage()->SetMaxCap("iron", player->GetStorage()->GetMaxCap("iron") + 100);
             return player->TakeWoodBeam(mina_cost);
+        }
 
+    }
+
+    if(type == "minac") {
+        if (island->GetZone(x, y)->GetType() == mnt){
+            player->GetStorage()->SetMaxCap("coal", player->GetStorage()->GetMaxCap("coal") + 100);
+            return player->TakeWoodBeam(mina_cost * 2);
+        }
+        else {
+            player->GetStorage()->SetMaxCap("coal", player->GetStorage()->GetMaxCap("coal") + 100);
+            return player->TakeWoodBeam(mina_cost);
+        }
     }
 
     if (type == "central") {
         if (x - 1 >= 0) {
             if (island->GetZone(x - 1, y)->GetType() == flr) {
-                if (island->GetZone(x, y)->GetType() == mnt)
+                if (island->GetZone(x, y)->GetType() == mnt) {
+                    player->GetStorage()->SetMaxCap("coal", player->GetStorage()->GetMaxCap("coal") + 100);
                     return player->TakeMoney(central_cost * 2);
-                else
+                }
+                else {
+                    player->GetStorage()->SetMaxCap("coal", player->GetStorage()->GetMaxCap("coal") + 100);
                     return player->TakeMoney(central_cost);
+                }
             }
         }
         if (x + 1 <= island->GetCols()) {
             if (island->GetZone(x + 1, y)->GetType() == flr) {
-                if (island->GetZone(x, y)->GetType() == mnt)
+                if (island->GetZone(x, y)->GetType() == mnt){
+                    player->GetStorage()->SetMaxCap("coal", player->GetStorage()->GetMaxCap("coal") + 100);
                     return player->TakeMoney(central_cost * 2);
-                else
+                }
+                else{
+                    player->GetStorage()->SetMaxCap("coal", player->GetStorage()->GetMaxCap("coal") + 100);
                     return player->TakeMoney(central_cost);
+                }
             }
         }
         if (y - 1 >= 0) {
             if (island->GetZone(x, y - 1)->GetType() == flr) {
-                if (island->GetZone(x, y)->GetType() == mnt)
+                if (island->GetZone(x, y)->GetType() == mnt){
+                    player->GetStorage()->SetMaxCap("coal", player->GetStorage()->GetMaxCap("coal") + 100);
                     return player->TakeMoney(central_cost * 2);
-                else
+                }
+                else {
+                    player->GetStorage()->SetMaxCap("coal", player->GetStorage()->GetMaxCap("coal") + 100);
                     return player->TakeMoney(central_cost);
+                }
             }
         }
         if (y + 1 <= island->GetRows()) {
             if (island->GetZone(x, y + 1)->GetType() == flr) {
-                if (island->GetZone(x, y)->GetType() == mnt)
+                if (island->GetZone(x, y)->GetType() == mnt){
+                    player->GetStorage()->SetMaxCap("coal", player->GetStorage()->GetMaxCap("coal") + 100);
                     return player->TakeMoney(central_cost) * 2;
-                else
+                }
+                else{
+                    player->GetStorage()->SetMaxCap("coal", player->GetStorage()->GetMaxCap("coal") + 100);
                     return player->TakeMoney(central_cost);
+                }
             }
         }
     }
 
     if (type == "bat") {
-        if (island->GetZone(x, y)->GetType() == mnt)
+        if (island->GetZone(x, y)->GetType() == mnt) {
+            player->GetStorage()->SetMaxCap("electricity", player->GetStorage()->GetMaxCap("electricity") + 100);
             return player->TakeSteel(bat_cost_steel * 2) && player->TakeMoney(bat_cost_money * 2);
-        else
+        }
+        else{
+            player->GetStorage()->SetMaxCap("electricity", player->GetStorage()->GetMaxCap("electricity") + 100);
             return player->TakeSteel(bat_cost_steel) && player->TakeMoney(bat_cost_money);
+        }
     }
 
     if (type == "fund") {
         if (island->GetZone(x, y)->GetType() == mnt)
             return player->TakeMoney(fund_cost * 2);
         else
-            return player->TakeMoney(fund_cost);
+                return player->TakeMoney(fund_cost);
     }
 
     if (type == "filt") {
@@ -424,20 +467,23 @@ bool App::CheckWorkerPurchase() {
 
 void App::LevelUp() {  //Trocar valores
     if(island->GetZone(x, y)->GetBuildingType() == minaf) {
-        if (island->GetZone(x, y)->GetBuilding()->LevelUp() && player->TakeWoodBeam(1) && player->TakeMoney(15))
-            cout << "Edifico melhorado para o nivel " << island->GetZone(x, y)->GetBuilding()->GetLevel() << ".\n";
+        if (island->GetZone(x, y)->GetBuilding()->LevelUp() && player->TakeWoodBeam(1) && player->TakeMoney(15)) {
+            player->GetStorage()->SetMaxCap("iron", player->GetStorage()->GetMaxCap("iron") + 10);
+            cout << "Edifico melhorado para o nivel " << island->GetZone(x, y)->GetBuilding()->GetLevel() << ".\n"; }
         else
             cout << "Recursos insuficientes!\n";
 
     } else if(island->GetZone(x, y)->GetBuildingType() == minac) {
-        if (island->GetZone(x, y)->GetBuilding()->LevelUp() && player->TakeWoodBeam(1) && player->TakeMoney(10))
-            cout << "Edifico melhorado para o nivel " << island->GetZone(x, y)->GetBuilding()->GetLevel() << ".\n";
+        if (island->GetZone(x, y)->GetBuilding()->LevelUp() && player->TakeWoodBeam(1) && player->TakeMoney(10)){
+            player->GetStorage()->SetMaxCap("coal", player->GetStorage()->GetMaxCap("coal") + 10);
+            cout << "Edifico melhorado para o nivel " << island->GetZone(x, y)->GetBuilding()->GetLevel() << ".\n";}
         else
             cout << "Recursos insuficientes!\n";
 
     } else if(island->GetZone(x, y)->GetBuildingType() == bat) {
-        if (island->GetZone(x, y)->GetBuilding()->LevelUp() && player->TakeMoney(5))
-            cout << "Edifico melhorado para o nivel " << island->GetZone(x, y)->GetBuilding()->GetLevel() << ".\n";
+        if (island->GetZone(x, y)->GetBuilding()->LevelUp() && player->TakeMoney(5)){
+            player->GetStorage()->SetMaxCap("electricity", player->GetStorage()->GetMaxCap("electricity") + 10);
+            cout << "Edifico melhorado para o nivel " << island->GetZone(x, y)->GetBuilding()->GetLevel() << ".\n";}
         else
             cout << "Recursos insuficientes!\n";
 
@@ -464,7 +510,7 @@ void App::GiveResources(int x, int y) {
         if (island->GetZone(x, y)->GetTrees() > 0) {
             for (auto &w: island->GetZone(x, y)->GetWorkerList()) {
                 if (w->GetType() == lenh) {
-                    player->GiveWood(1);
+                    player->GiveWoodFlr(1);
                 }
             }
         }
@@ -490,6 +536,14 @@ void App::GiveResources(int x, int y) {
         }
 
     } else if (island->GetZone(x, y)->GetType() == mnt) {
+
+        //adicionar for
+        if (island->GetZone(x, y)->GetType() == mnt) {
+            float a = stof(island->GetZone(x, y)->GetWorkerCount());
+            a *= 0.1;
+            player->GiveIronMont(a);
+        }
+
 
         if (island->GetZone(x, y)->GetBuildingType() == minaf) {
             vector <Worker*> temp_list = island->GetZone(x, y)->GetWorkerList();

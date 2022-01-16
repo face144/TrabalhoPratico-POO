@@ -104,6 +104,10 @@ void Player::GiveIron(float iron) {
         storage->SetCap("iron", storage->GetMaxCap("iron"));
 }
 
+void Player::GiveIronMont(float iron) {
+    storage->SetCap("iron", storage->GetCap("iron") + iron);
+}
+
 void Player::GiveSteel(float steel) {
     if (TakeIron(1) && TakeCoal(1)) {
         storage->SetCap("steel", storage->GetCap("steel") + steel);
@@ -134,6 +138,10 @@ void Player::GiveElectricity(float electricity) {
     storage->SetCap("electricity", storage->GetCap("electricity") + electricity);
     if (storage->GetCap("electricity") > storage->GetMaxCap("electricity"))
         storage->SetCap("electricity", storage->GetMaxCap("electricity"));
+}
+
+void Player::GiveWoodFlr(float wood) {
+    storage->SetCap("wood", storage->GetCap("wood") + wood);
 }
 
 string Player::GetUsername() {

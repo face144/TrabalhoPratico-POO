@@ -13,7 +13,7 @@ using namespace std;
 
 class Island {
     int cols, rows;
-    vector <Cell*> zone;
+    Cell** zone;
 
 public:
     Island();

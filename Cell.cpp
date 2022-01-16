@@ -14,7 +14,7 @@ Cell* Cell::Create(const string& type) {
     Cell* zone = new Cell;
 
     if (type == undef)
-        switch (rand() % 6 + 1) {
+        switch ( rand() % 6 + 1) {
 
             case 1:
                 zone->type = mnt;
@@ -164,6 +164,9 @@ string Cell::GetCellInfo() {
     oss << " ---------------------------" << endl;
     oss << "| Bioma: " << type << endl;
     oss << "| Edificio: " << building->GetType() << endl;
+    if (type == flr) {
+        oss << "| Arvores: " << trees << endl;
+    }
     oss << "| Trabalhadores: " << endl;
 
     if ( !worker_list.empty() )

@@ -34,11 +34,13 @@ public:
 
     void GiveMoney(float money);
     void GiveIron(float iron);
+    void GiveIronMont(float iron);
     void GiveSteel(float steel);
     void GiveCoal(float coal);
     void GiveWood(float wood);
     void GiveWoodBeam(float wood_beam);
     void GiveElectricity(float electricity);
+    void GiveWoodFlr(float wood);
 
     string GetUsername();
     Storage* GetStorage();

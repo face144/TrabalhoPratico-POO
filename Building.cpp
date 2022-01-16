@@ -1,4 +1,4 @@
-#include "Building.h"
+    #include "Building.h"
 
 
 Building::Building() {
@@ -12,7 +12,9 @@ Building::Building() {
     days = 0;
 }
 
-Building::~Building() { }
+Building::~Building() {
+
+}
 
 void Building::NextDay() {
     days++;
@@ -87,6 +89,10 @@ Building* Building::Create(const string& type) {
         building = new Serr;
     } else building = new Building;
     return building;
+}
+
+float Building::GiveMoneyDestroy() {
+
 }
 
 Minaf::Minaf() {

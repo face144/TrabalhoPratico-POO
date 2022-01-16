@@ -62,7 +62,7 @@ Resource* Resource::Create(string type) {
     } else
         return nullptr;
 
-    resource->quantity = 0;
+    resource->quantity = 10000;
     resource->max = 0;
     resource->type = type;
     return resource;
