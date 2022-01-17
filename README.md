@@ -22,6 +22,7 @@ IMPORTANTE: Este trabalho não usa a framework Qt.
 
 # O que nao funciona?
 Pequenos detalhes que nem eu me lembro. A base de jogo em si funciona e ha possibilidade de 'ganhar'.
+Formatacao da ilha na consola.
 
 # Lista de comandos
 Funcao CheckSyntax() no ficheiro App.cpp tem um if else com a lista dos comandos.
