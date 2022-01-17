@@ -18,3 +18,13 @@ ser usada para compensar outras partes em falta. Todo o trabalho de exploração
 fica a cargo dos interessados em a usar.
 
 IMPORTANTE: Este trabalho não usa a framework Qt.
+
+
+# O que nao funciona?
+Pequenos detalhes que nem eu me lembro. A base de jogo em si funciona e ha possibilidade de 'ganhar'.
+
+# Lista de comandos
+Funcao CheckSyntax() no ficheiro App.cpp tem um if else com a lista dos comandos.
+
+# Outras informacoes
+Para mudar os recursos iniciais basta ir ao ficheiro Storage.cpp e na funcao Create(string type) trocar a variavel 'quantity' (deve estar a 10000) para o valor desejado.
